@@ -2,6 +2,7 @@ package com.github.ruediste.rendersnakeXT.canvas;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -46,8 +47,15 @@ public class HtmlCanvasTest {
 
     @Test
     public void withAttrs() {
-        canvas.tag("html", w -> w.write(" id=\"foo\"")).close();
+        canvas.tag("html").addAttribute("id", "foo").close();
         assertEquals("<html id=\"foo\"></html>", writer.toString());
     }
 
+    @Test
+    public void repeatedClasses() throws IOException {
+        canvas.tag("html").CLASS("foo").addAttribute("id", "bar").CLASS("foo2")
+                .close();
+        assertEquals("<html id=\"bar\" class=\"foo foo2\"></html>",
+                writer.toString());
+    }
 }

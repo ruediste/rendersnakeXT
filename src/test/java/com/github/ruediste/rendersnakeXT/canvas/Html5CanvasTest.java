@@ -10,18 +10,8 @@ import org.junit.Test;
 
 public class Html5CanvasTest {
 
-    private static class Attr extends HtmlAttributesBase<Attr> implements
-            Html5Attributes<Attr> {
-
-        @Override
-        public Attr self() {
-            return this;
-        }
-
-    }
-
     private static class Canvas extends DirectHtmlCanvasBase<Canvas> implements
-            Html5Canvas<Canvas, Attr> {
+            Html5Canvas<Canvas> {
 
         public Canvas(Writer output) {
             super(output);
@@ -30,11 +20,6 @@ public class Html5CanvasTest {
         @Override
         public Canvas self() {
             return this;
-        }
-
-        @Override
-        public Attr internal_attr() {
-            return new Attr();
         }
 
     }
@@ -51,19 +36,22 @@ public class Html5CanvasTest {
     @Test
     public void simple() {
         canvas.html()._html();
-        assertEquals("<html></html>", writer.toString());
+        expect("<html></html>");
     }
 
     @Test
     public void simpleWithId() {
-        canvas.html(a -> a.id("foo"))._html();
-        assertEquals("<html id=\"foo\"></html>", writer.toString());
+        canvas.html().ID("foo")._html();
+        expect("<html id=\"foo\"></html>");
     }
 
     @Test
     public void simpleWithIdAndClass() {
-        canvas.html(a -> a.id("foo").class_("Hello\">World"))._html();
-        assertEquals("<html id=\"foo\" class=\"Hello&#34;>World\"></html>",
-                writer.toString());
+        canvas.html().ID("foo").CLASS("Hello\">World")._html();
+        expect("<html id=\"foo\" class=\"Hello&#34;>World\"></html>");
+    }
+
+    private void expect(String str) {
+        assertEquals(str, writer.toString());
     }
 }

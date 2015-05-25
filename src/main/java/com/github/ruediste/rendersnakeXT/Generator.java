@@ -23,14 +23,16 @@ public class Generator {
         HtmlStandard std = new Parser().parse(getClass().getResourceAsStream(
                 "index.html"));
 
-        generateTags(std);
-        generateAttrs(std);
+        OutputStreamWriter out = openWriter("Html5Canvas");
+        generateTags(std, out);
+        generateAttrs(std, out);
     }
 
-    private void generateAttrs(HtmlStandard std) throws Throwable {
-        OutputStreamWriter out = openWriter("Html5Attributes");
-        out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
-                + "public interface Html5Attributes<TAttr> extends HtmlAttributes<TAttr> {\n");
+    private void generateAttrs(HtmlStandard std, OutputStreamWriter out)
+            throws Throwable {
+        // out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
+        // +
+        // "public interface Html5Attributes<TAttr> extends HtmlAttributes<TAttr> {\n");
 
         HashSet<String> seenAttributes = new HashSet<>();
         seenAttributes.add("class"); // suppress generation of the class
@@ -54,21 +56,20 @@ public class Generator {
 
     private void generateAttribute(OutputStreamWriter out, HtmlAttribute attr)
             throws IOException {
-        String escapedName = escapeToFunctionName(attr.name);
+        String escapedName = escapeToFunctionName(attr.name.toUpperCase());
         out.write("/** " + attr.description + "*/\n");
-        out.write("    default TAttr " + escapedName + "(String " + escapedName
-                + ") {\n" + "        return add(\"" + attr.name + "\", "
-                + escapedName + ");\n" + "    }\n");
+        out.write("    default TSelf " + escapedName + "(String " + escapedName
+                + ") {\n" + "        return addAttribute(\"" + attr.name
+                + "\", " + escapedName + ");\n" + "    }\n");
     }
 
-    private void generateTags(HtmlStandard std) throws Throwable {
-        OutputStreamWriter out = openWriter("Html5Canvas");
+    private void generateTags(HtmlStandard std, OutputStreamWriter out)
+            throws Throwable {
 
         out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
                 + "import java.util.function.Function;\n"
-                + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf, TAttr>, TAttr extends Html5Attributes<TAttr>>\n"
-                + "        extends HtmlCanvas<TSelf> {\n"
-                + "    TAttr internal_attr();\n");
+                + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>\n"
+                + "        extends HtmlCanvas<TSelf> {\n");
 
         HashSet<String> seenTags = new HashSet<>();
         for (HtmlElement element : std.elements) {
@@ -77,19 +78,14 @@ public class Generator {
             String escapedTag = escapeToFunctionName(element.tag);
             out.write("/** " + element.description + "*/\n");
             out.write("    default TSelf " + escapedTag + "() {\n"
-                    + "        return " + escapedTag + "(a -> a);\n"
+                    + "        return tag(\"" + element.tag + "\");\n"
                     + "    }\n" + "\n");
-            out.write("/** " + element.description + "*/\n");
-            out.write("    default TSelf " + element.tag
-                    + "(Function<TAttr, TAttr> a) {\n"
-                    + "        return tag(\"" + element.tag
-                    + "\", a.apply(internal_attr()));\n" + "    }\n"
-                    + "    default TSelf _" + escapedTag + "() {\n"
-                    + "        return tag_close(\"" + element.tag + "\");\n"
-                    + "    }");
+            out.write("    default TSelf _" + escapedTag + "() {\n"
+                    + "        return close(\"" + element.tag + "\");\n"
+                    + "    }\n");
         }
-        out.write("}\n");
-        out.close();
+        // out.write("}\n");
+        // out.close();
     }
 
     private OutputStreamWriter openWriter(String className) throws Throwable {

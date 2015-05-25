@@ -3,8 +3,8 @@ package com.github.ruediste.rendersnakeXT.canvas;
 import java.io.IOException;
 import java.io.Writer;
 
-public abstract class DirectHtmlCanvasBase<TSelf> extends
-        TagStackHtmlCanvasBase<TSelf> {
+public abstract class DirectHtmlCanvasBase<TSelf extends DirectHtmlCanvasBase<TSelf>>
+        extends HtmlCanvasBase<TSelf> {
     /**
      * The writer that will collect all HTML code.
      */
@@ -20,23 +20,12 @@ public abstract class DirectHtmlCanvasBase<TSelf> extends
     }
 
     @Override
-    public TSelf writeUnescaped(String str) {
-        try {
-            out.write(str);
-        } catch (IOException e) {
-            throw new RuntimeException("Error while writing to output", e);
-        }
-        return self();
-    }
-
-    @Override
-    public TSelf writeUnescaped(CharactersWriteable writeable) {
+    public void internal_writeUnescaped(CharactersWriteable writeable) {
         try {
             writeable.writeCharsOn(out);
         } catch (IOException e) {
             throw new RuntimeException("Error while writing to output", e);
         }
-        return self();
     }
 
 }
