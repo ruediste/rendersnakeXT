@@ -67,7 +67,6 @@ public class Generator {
             throws Throwable {
 
         out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
-                + "import java.util.function.Function;\n"
                 + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>\n"
                 + "        extends HtmlCanvas<TSelf> {\n");
 
@@ -76,13 +75,21 @@ public class Generator {
             if (!seenTags.add(element.tag))
                 continue;
             String escapedTag = escapeToFunctionName(element.tag);
-            out.write("/** " + element.description + "*/\n");
-            out.write("    default TSelf " + escapedTag + "() {\n"
-                    + "        return tag(\"" + element.tag + "\");\n"
-                    + "    }\n" + "\n");
-            out.write("    default TSelf _" + escapedTag + "() {\n"
-                    + "        return close(\"" + element.tag + "\");\n"
-                    + "    }\n");
+            if (element.endTagOmissed) {
+                out.write("/** No End Tag Allowed! <br>" + element.description
+                        + "*/\n");
+                out.write("    default TSelf " + escapedTag + "() {\n"
+                        + "        return startTagWithoutEndTag(\""
+                        + element.tag + "\");\n    }\n");
+            } else {
+                out.write("/** " + element.description + "*/\n");
+                out.write("    default TSelf " + escapedTag + "() {\n"
+                        + "        return tag(\"" + element.tag + "\");\n"
+                        + "    }\n" + "\n");
+                out.write("    default TSelf _" + escapedTag + "() {\n"
+                        + "        return close(\"" + element.tag + "\");\n"
+                        + "    }\n");
+            }
         }
         // out.write("}\n");
         // out.close();
