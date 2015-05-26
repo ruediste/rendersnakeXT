@@ -1,87 +1,71 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-import java.util.ArrayList;
+import java.io.Writer;
 
 /**
  * Base class for HTML canvases
  */
 public abstract class HtmlCanvasBase<TSelf extends HtmlCanvasBase<TSelf>>
-        implements HtmlCanvas<TSelf> {
+		implements HtmlCanvas<TSelf> {
 
-    protected static class StackEntry {
-        String display;
-        String closeFragment;
+	private final HtmlCanvasTarget target;
 
-        public StackEntry(String display, String closeFragment) {
-            this.display = display;
-            this.closeFragment = closeFragment;
-        }
+	public HtmlCanvasBase(Writer writer) {
+		this.target = new HtmlCanvasTarget(writer);
+	}
 
-    }
+	public HtmlCanvasBase(HtmlCanvasTarget target) {
+		this.target = target;
+	}
 
-    /**
-     * Collection of written open elements to be closed.
-     */
-    protected ArrayList<StackEntry> openTagStack = new ArrayList<>(32);
+	@Override
+	public void internal_writeUnescaped(CharactersWriteable writeable) {
+		target.internal_writeUnescaped(writeable);
+	}
 
-    private StringBuilder classBuilder = new StringBuilder();
-    protected String postAttributesFragment;
+	@Override
+	public TSelf startTag(String display, String postAttributesFragment,
+			String closeFragment) {
+		target.startTag(display, postAttributesFragment, closeFragment);
+		return self();
+	}
 
-    @Override
-    public TSelf startTag(String display, String postAttributesFragment,
-            String closeFragment) {
-        commitAttributes();
-        classBuilder.setLength(0);
-        this.postAttributesFragment = postAttributesFragment;
-        openTagStack.add(new StackEntry(display, closeFragment));
-        return self();
-    }
+	@Override
+	public TSelf addAttribute(String key, String value) {
+		target.addAttribute(key, value);
+		return self();
+	}
 
-    @Override
-    public void commitAttributes() {
-        if (postAttributesFragment != null) {
-            if (classBuilder.length() > 0) {
-                addAttribute("class", classBuilder.toString());
-            }
-            internal_writeUnescaped(out -> out.write(postAttributesFragment));
-            postAttributesFragment = null;
-        }
-    }
+	@Override
+	public void commitAttributes() {
+		target.commitAttributes();
+	}
 
-    @Override
-    public TSelf CLASS(String class_) {
-        checkAttributesUncommited();
-        if (classBuilder.length() > 0)
-            classBuilder.append(" ");
-        classBuilder.append(class_);
-        return self();
-    }
+	@Override
+	public TSelf CLASS(String class_) {
+		target.CLASS(class_);
+		return self();
+	}
 
-    @Override
-    public void checkAttributesUncommited() {
-        if (postAttributesFragment == null)
-            throw new RuntimeException(
-                    "attributes of the last tag are already commited");
-    }
+	@Override
+	public void checkAttributesUncommited() {
+		target.checkAttributesUncommited();
+	}
 
-    @Override
-    public TSelf close() {
-        if (openTagStack.isEmpty())
-            throw new RuntimeException("Empty Stack");
-        writeUnescaped(openTagStack.remove(openTagStack.size() - 1).closeFragment);
-        return self();
-    }
+	@Override
+	public TSelf close() {
+		target.close();
+		return self();
+	}
 
-    @Override
-    public TSelf close(String expectedDisplay) {
-        if (openTagStack.isEmpty())
-            throw new RuntimeException("Open Tag stack is empty");
-        StackEntry popped = openTagStack.remove(openTagStack.size() - 1);
-        if (!popped.display.equals(expectedDisplay))
-            throw new RuntimeException("Expected to close \"" + expectedDisplay
-                    + "\" but \"" + popped.display + "\" was started");
-        writeUnescaped(popped.closeFragment);
-        return self();
-    }
+	@Override
+	public TSelf close(String expectedDisplay) {
+		target.close(expectedDisplay);
+		return self();
+	}
+
+	public HtmlCanvasTarget getTarget() {
+		return target;
+	}
 
 }

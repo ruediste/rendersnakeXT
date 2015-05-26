@@ -11,51 +11,51 @@ import org.junit.Test;
 
 public class HtmlCanvasTest {
 
-    private static class Canvas extends DirectHtmlCanvasBase<Canvas> {
+	private static class Canvas extends HtmlCanvasBase<Canvas> {
 
-        public Canvas(Writer output) {
-            super(output);
-        }
+		public Canvas(Writer output) {
+			super(output);
+		}
 
-        @Override
-        public Canvas self() {
-            return this;
-        }
+		@Override
+		public Canvas self() {
+			return this;
+		}
 
-    }
+	}
 
-    Canvas canvas;
-    StringWriter writer;
+	Canvas canvas;
+	StringWriter writer;
 
-    @Before
-    public void before() {
-        writer = new StringWriter();
-        canvas = new Canvas(writer);
-    }
+	@Before
+	public void before() {
+		writer = new StringWriter();
+		canvas = new Canvas(writer);
+	}
 
-    @Test
-    public void simple() {
-        canvas.tag("html").close();
-        assertEquals("<html></html>", writer.toString());
-    }
+	@Test
+	public void simple() {
+		canvas.tag("html").close();
+		assertEquals("<html></html>", writer.toString());
+	}
 
-    @Test
-    public void escaped() {
-        canvas.write("foo<?>");
-        assertEquals("foo&lt;?&gt;", writer.toString());
-    }
+	@Test
+	public void escaped() {
+		canvas.write("foo<?>");
+		assertEquals("foo&lt;?&gt;", writer.toString());
+	}
 
-    @Test
-    public void withAttrs() {
-        canvas.tag("html").addAttribute("id", "foo").close();
-        assertEquals("<html id=\"foo\"></html>", writer.toString());
-    }
+	@Test
+	public void withAttrs() {
+		canvas.tag("html").addAttribute("id", "foo").close();
+		assertEquals("<html id=\"foo\"></html>", writer.toString());
+	}
 
-    @Test
-    public void repeatedClasses() throws IOException {
-        canvas.tag("html").CLASS("foo").addAttribute("id", "bar").CLASS("foo2")
-                .close();
-        assertEquals("<html id=\"bar\" class=\"foo foo2\"></html>",
-                writer.toString());
-    }
+	@Test
+	public void repeatedClasses() throws IOException {
+		canvas.tag("html").CLASS("foo").addAttribute("id", "bar").CLASS("foo2")
+				.close();
+		assertEquals("<html id=\"bar\" class=\"foo foo2\"></html>",
+				writer.toString());
+	}
 }
