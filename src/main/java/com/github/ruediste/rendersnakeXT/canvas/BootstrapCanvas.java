@@ -580,6 +580,28 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * }
      * </pre>
      */
+    default TSelf bControlLabel() {
+        return bControlLabel(x -> {
+        });
+    }
+
+    /**
+     * Use this for labels together with {@link #B_FORM_HORIZONTAL()}
+     * 
+     * <pre>
+     * {@code
+     * <form class="form-horizontal">
+     *   <div class="form-group">
+     *     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+     *     <div class="col-sm-10">
+     *       <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+     *     </div>
+     *   </div>
+     *   ...
+     * </form>
+     * }
+     * </pre>
+     */
     default TSelf bControlLabel(Consumer<B_ColBuilder> attr) {
         return tag("label", "bControlLabel").CLASS("control-label").CLASS(attr);
     }

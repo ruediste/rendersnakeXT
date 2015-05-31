@@ -10,7 +10,8 @@ import org.junit.Test;
 
 public class HtmlCanvasTest {
 
-    private static class Canvas extends HtmlCanvasBase<Canvas> {
+    private static class Canvas extends HtmlCanvasBase<Canvas> implements
+            Html5Canvas<Canvas> {
 
         @Override
         public Canvas self() {

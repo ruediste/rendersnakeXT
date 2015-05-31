@@ -1165,10 +1165,6 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     default TSelf HTTP_EQUIV(String HTTP_EQUIV) {
         return addAttribute("http-equiv", HTTP_EQUIV);
     }
-/**  Value of the element*/
-    default TSelf CONTENT(String CONTENT) {
-        return addAttribute("content", CONTENT);
-    }
 /**  Character encoding declaration*/
     default TSelf CHARSET(String CHARSET) {
         return addAttribute("charset", CHARSET);

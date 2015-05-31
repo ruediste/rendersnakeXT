@@ -37,6 +37,8 @@ public class Generator {
         HashSet<String> seenAttributes = new HashSet<>();
         seenAttributes.add("class"); // suppress generation of the class
                                      // attribute
+        seenAttributes.add("content"); // having both content and CONTENT is
+                                       // annoying
         for (HtmlAttribute attr : std.globalAttributes) {
             if (!seenAttributes.add(attr.name))
                 continue;
@@ -91,8 +93,6 @@ public class Generator {
                         + "    }\n");
             }
         }
-        // out.write("}\n");
-        // out.close();
     }
 
     private OutputStreamWriter openWriter(String className) throws Throwable {

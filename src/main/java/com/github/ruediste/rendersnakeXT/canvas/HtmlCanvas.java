@@ -202,4 +202,9 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
         return self;
     }
 
+    default TSelf render(Runnable r) {
+        r.run();
+        return self();
+    }
+
 }
