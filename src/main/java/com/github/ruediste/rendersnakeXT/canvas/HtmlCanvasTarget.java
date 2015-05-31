@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.owasp.encoder.Encode;
 
+import com.google.common.base.Strings;
+
 /**
  * Target for a {@link HtmlCanvasBase}. This class can be instantiated and then
  * wrapped by any {@link HtmlCanvas}.
@@ -107,6 +109,8 @@ public class HtmlCanvasTarget {
 
     public void CLASS(String class_) {
         checkAttributesUncommited();
+        if (Strings.isNullOrEmpty(class_))
+            return;
         if (classBuilder.length() > 0)
             classBuilder.append(" ");
         classBuilder.append(class_);

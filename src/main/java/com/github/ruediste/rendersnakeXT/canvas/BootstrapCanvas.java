@@ -44,15 +44,15 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         return close("bRow");
     }
 
-    public static class B_RowBuilder {
+    public static class B_ColBuilder {
         private BootstrapCanvas<?> canvas;
 
-        private B_RowBuilder(BootstrapCanvas<?> canvas) {
+        private B_ColBuilder(BootstrapCanvas<?> canvas) {
             this.canvas = canvas;
 
         }
 
-        private B_RowBuilder add(String type, int size) {
+        private B_ColBuilder add(String type, int size) {
             canvas.CLASS("col-" + type + "-" + size);
             return this;
         }
@@ -60,120 +60,125 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         /**
          * Extra small devices Phones (<768px)
          */
-        public B_RowBuilder xs(int size) {
+        public B_ColBuilder xs(int size) {
             return add("xs", size);
         }
 
         /**
          * Small devices Tablets (≥768px)
          */
-        public B_RowBuilder sm(int size) {
+        public B_ColBuilder sm(int size) {
             return add("sm", size);
         }
 
         /**
          * Medium devices Desktops (≥992px)
          */
-        public B_RowBuilder md(int size) {
+        public B_ColBuilder md(int size) {
             return add("md", size);
         }
 
         /**
          * Large devices Desktops (≥1200px)
          */
-        public B_RowBuilder lg(int size) {
+        public B_ColBuilder lg(int size) {
             return add("lg", size);
         }
 
         /**
          * Extra small devices Phones (<768px)
          */
-        public B_RowBuilder xsOffset(int size) {
+        public B_ColBuilder xsOffset(int size) {
             return add("xs-offset", size);
         }
 
         /**
          * Small devices Tablets (≥768px)
          */
-        public B_RowBuilder smOffset(int size) {
+        public B_ColBuilder smOffset(int size) {
             return add("sm-offset", size);
         }
 
         /**
          * Medium devices Desktops (≥992px)
          */
-        public B_RowBuilder mdOffset(int size) {
+        public B_ColBuilder mdOffset(int size) {
             return add("md-offset", size);
         }
 
         /**
          * Large devices Desktops (≥1200px)
          */
-        public B_RowBuilder lgOffset(int size) {
+        public B_ColBuilder lgOffset(int size) {
             return add("lg-offset", size);
         }
 
         /**
          * Extra small devices Phones (<768px)
          */
-        public B_RowBuilder xsPull(int size) {
+        public B_ColBuilder xsPull(int size) {
             return add("xs-pull", size);
         }
 
         /**
          * Small devices Tablets (≥768px)
          */
-        public B_RowBuilder smPull(int size) {
+        public B_ColBuilder smPull(int size) {
             return add("sm-pull", size);
         }
 
         /**
          * Medium devices Desktops (≥992px)
          */
-        public B_RowBuilder mdPull(int size) {
+        public B_ColBuilder mdPull(int size) {
             return add("md-pull", size);
         }
 
         /**
          * Large devices Desktops (≥1200px)
          */
-        public B_RowBuilder lgPull(int size) {
+        public B_ColBuilder lgPull(int size) {
             return add("lg-pull", size);
         }
 
         /**
          * Extra small devices Phones (<768px)
          */
-        public B_RowBuilder xsPush(int size) {
+        public B_ColBuilder xsPush(int size) {
             return add("xs-push", size);
         }
 
         /**
          * Small devices Tablets (≥768px)
          */
-        public B_RowBuilder smPush(int size) {
+        public B_ColBuilder smPush(int size) {
             return add("sm-push", size);
         }
 
         /**
          * Medium devices Desktops (≥992px)
          */
-        public B_RowBuilder mdPush(int size) {
+        public B_ColBuilder mdPush(int size) {
             return add("md-push", size);
         }
 
         /**
          * Large devices Desktops (≥1200px)
          */
-        public B_RowBuilder lgPush(int size) {
+        public B_ColBuilder lgPush(int size) {
             return add("lg-push", size);
         }
 
     }
 
-    default TSelf bCol(Consumer<B_RowBuilder> cols) {
+    default TSelf bCol(Consumer<B_ColBuilder> cols) {
         tag("div", "bCol");
-        cols.accept(new B_RowBuilder(this));
+        cols.accept(new B_ColBuilder(this));
+        return self();
+    }
+
+    default TSelf CLASS(Consumer<B_ColBuilder> cols) {
+        cols.accept(new B_ColBuilder(this));
         return self();
     }
 
@@ -444,8 +449,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
     /**
      * Wrap labels and controls in .form-group for optimum spacing. <br>
-     * Do not mix form groups directly with input groups. Instead, nest the
-     * input group inside of the form group.
+     * Do not mix form groups directly with {@link #B_INPUT_GROUP()}s. Instead,
+     * nest the input group inside of the form group.
      * 
      * <pre>
      * {@code
@@ -459,8 +464,12 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * }
      * </pre>
      */
-    default TSelf B_FORM_GROUP() {
-        return CLASS("form-group");
+    default TSelf bFormGroup() {
+        return tag("div", "bFormGroup").CLASS("form-group");
+    }
+
+    default TSelf _bFormGroup() {
+        return close("bFormGroup");
     }
 
     /**
@@ -485,12 +494,44 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
+     * Group inputs and {@link #B_INPUT_GROUP_ADDON()} s together
+     * 
+     * <pre>
+     * {@code
+     * <form class="form-inline">
+     *   <div class="form-group">
+     *     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+     *     <div class="input-group">
+     *       <div class="input-group-addon">$</div>
+     *       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+     *       <div class="input-group-addon">.00</div>
+     *     </div>
+     *   </div>
+     *   <button type="submit" class="btn btn-primary">Transfer cash</button>
+     * </form>
+     * }
+     * </pre>
+     */
+    default TSelf B_INPUT_GROUP() {
+        return CLASS("input-group");
+    }
+
+    /**
      * place a div directly adjacent to an input
      * 
      * <pre>
      * {@code
-     * <div class="input-group-addon">$</div>
-     * <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+     * <form class="form-inline">
+     *   <div class="form-group">
+     *     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+     *     <div class="input-group">
+     *       <div class="input-group-addon">$</div>
+     *       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+     *       <div class="input-group-addon">.00</div>
+     *     </div>
+     *   </div>
+     *   <button type="submit" class="btn btn-primary">Transfer cash</button>
+     * </form>
      * }
      * </pre>
      */
@@ -500,9 +541,9 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
     /**
      * Use Bootstrap's predefined grid classes to align labels and groups of
-     * form controls in a horizontal layout by adding .form-horizontal to @Override
-     * the form (which doesn't have to be a {@code <form>}). Doing so changes
-     * .form-groups to behave as grid rows, so no need for .row.
+     * form controls in a horizontal layout by adding .form-horizontal to
+     * override the form (which doesn't have to be a {@code <form>}). Doing so
+     * changes .form-groups to behave as grid rows, so no need for .row.
      * 
      * <pre>
      * {@code
@@ -520,6 +561,31 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      */
     default TSelf B_FORM_HORIZONTAL() {
         return CLASS("form-horizontal");
+    }
+
+    /**
+     * Use this for labels together with {@link #B_FORM_HORIZONTAL()}
+     * 
+     * <pre>
+     * {@code
+     * <form class="form-horizontal">
+     *   <div class="form-group">
+     *     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+     *     <div class="col-sm-10">
+     *       <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+     *     </div>
+     *   </div>
+     *   ...
+     * </form>
+     * }
+     * </pre>
+     */
+    default TSelf bControlLabel(Consumer<B_ColBuilder> attr) {
+        return tag("label", "bControlLabel").CLASS("control-label").CLASS(attr);
+    }
+
+    default TSelf _bControlLabel() {
+        return close("bControlLabel");
     }
 
     /**
@@ -856,7 +922,380 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * </pre>
      */
     default TSelf B_HELP_BLOCK() {
-        return CLASS("");
+        return CLASS("help-block");
+    }
+
+    public class B_ButtonArgs {
+        private BootstrapCanvas<?> html;
+        private boolean styleSet;
+        private boolean isAnchor;
+
+        private B_ButtonArgs(BootstrapCanvas<?> html, boolean isAnchor) {
+            this.html = html;
+            this.isAnchor = isAnchor;
+        }
+
+        public B_ButtonArgs def() {
+            html.CLASS("btn-default");
+            styleSet = true;
+            return this;
+        }
+
+        public B_ButtonArgs primary() {
+            html.CLASS("btn-primary");
+            styleSet = true;
+            return this;
+        }
+
+        public B_ButtonArgs success() {
+            html.CLASS("btn-success");
+            styleSet = true;
+            return this;
+        }
+
+        public B_ButtonArgs info() {
+            html.CLASS("btn-info");
+            styleSet = true;
+            return this;
+        }
+
+        public B_ButtonArgs warning() {
+            html.CLASS("btn-warning");
+            styleSet = true;
+            return this;
+        }
+
+        public B_ButtonArgs danger() {
+            html.CLASS("btn-danger");
+            styleSet = true;
+            return this;
+        }
+
+        /**
+         * large Button
+         */
+        public B_ButtonArgs lg() {
+            html.CLASS("btn-lg");
+            return this;
+        }
+
+        /**
+         * small Button
+         */
+        public B_ButtonArgs sm() {
+            html.CLASS("btn-sm");
+            return this;
+        }
+
+        /**
+         * extra small Button
+         */
+        public B_ButtonArgs xs() {
+            html.CLASS("btn-xs");
+            return this;
+        }
+
+        /**
+         * Create block level buttons—those that span the full width of a
+         * parent— by adding .btn-block.
+         */
+        public B_ButtonArgs block() {
+            html.CLASS("btn-block");
+            return this;
+        }
+
+        /**
+         * Buttons will appear pressed (with a darker background, darker border,
+         * and inset shadow) when active. For &lt;button> elements, this is done
+         * via :active. For &lt;a> elements, it's done with .active. However,
+         * you may use .active on &lt;button>s (and include the
+         * aria-pressed="true" attribute) should you need to replicate the
+         * active state programmatically.
+         */
+        public B_ButtonArgs active() {
+            html.CLASS("active");
+            if (!isAnchor) {
+                html.addAttribute("aria-pressed", "true");
+            }
+            return this;
+        }
+
+        /**
+         * Make buttons look unclickable by fading them back with opacity.
+         */
+        public B_ButtonArgs disabled() {
+            if (isAnchor) {
+                html.CLASS("disabled");
+            } else
+                html.DISABLED("disabled");
+            return this;
+        }
+
+    }
+
+    /**
+     * Create a button. For links, use {@link #bButtonA()}
+     */
+    default TSelf bButton() {
+        return bButton(x -> {
+        });
+    }
+
+    /**
+     * Create a button. For links, use {@link #bButtonA()}
+     */
+    default TSelf bButton(Consumer<B_ButtonArgs> args) {
+        TSelf result = tag("button", "bButton").CLASS("btn").TYPE("button");
+        B_ButtonArgs tmp = new B_ButtonArgs(result, false);
+        args.accept(tmp);
+        if (!tmp.styleSet) {
+            result.CLASS("btn-default");
+        }
+        return result;
+    }
+
+    default TSelf _bButton() {
+        return close("bButton");
+    }
+
+    /**
+     * Create a link (&lt;a>) styled as button
+     */
+    default TSelf bButtonA() {
+        return bButtonA(x -> {
+        });
+    }
+
+    /**
+     * Create a link (&lt;a>) styled as button
+     */
+    default TSelf bButtonA(Consumer<B_ButtonArgs> args) {
+        TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role",
+                "button");
+        B_ButtonArgs tmp = new B_ButtonArgs(result, true);
+        args.accept(tmp);
+        if (!tmp.styleSet) {
+            result.CLASS("btn-default");
+        }
+        return result;
+    }
+
+    default TSelf _bButtonA() {
+        return close("bButtonA");
+    }
+
+    public class B_ImgArgs {
+        private BootstrapCanvas<?> html;
+
+        private B_ImgArgs(BootstrapCanvas<?> html) {
+            this.html = html;
+        }
+
+        /**
+         * Images in Bootstrap 3 can be made responsive-friendly via the
+         * addition of the .img-responsive class. This applies max-width: 100%;
+         * and height: auto; to the image so that it scales nicely to the parent
+         * element.
+         */
+        public B_ImgArgs responsive() {
+            html.CLASS("img-responsive");
+            return this;
+        }
+
+        /**
+         * add rounded corners
+         */
+        public B_ImgArgs rounded() {
+            html.CLASS("img-rounded");
+            return this;
+        }
+
+        /**
+         * make the image a circle
+         */
+        public B_ImgArgs circle() {
+            html.CLASS("img-circle");
+            return this;
+        }
+
+        /**
+         * add a border outside of the image
+         */
+        public B_ImgArgs thumbnail() {
+            html.CLASS("img-thumbnail");
+            return this;
+        }
+    }
+
+    default TSelf bImg(Consumer<B_ImgArgs> args) {
+        tag("img", "bImg");
+        args.accept(new B_ImgArgs(this));
+        return self();
+    }
+
+    default TSelf _bImg() {
+        return close("bImg");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_MUTED() {
+        return CLASS("text-muted");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_PRIMARY() {
+        return CLASS("text-primary");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_SUCCESS() {
+        return CLASS("text-success");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_INFO() {
+        return CLASS("text-info");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_WARNING() {
+        return CLASS("text-warning");
+    }
+
+    /**
+     * Contextual colors <br/>
+     * Convey meaning through color with a handful of emphasis utility classes.
+     * These may also be applied to links and will darken on hover just like our
+     * default link styles.
+     */
+    default TSelf B_TEXT_DANGER() {
+        return CLASS("text-danger");
+    }
+
+    /**
+     * Similar to the contextual text color classes, easily set the background
+     * of an element to any contextual class. Anchor components will darken on
+     * hover, just like the text classes.
+     */
+    default TSelf B_BG_PRIMARY() {
+        return CLASS("bg-primary");
+    }
+
+    /**
+     * Similar to the contextual text color classes, easily set the background
+     * of an element to any contextual class. Anchor components will darken on
+     * hover, just like the text classes.
+     */
+    default TSelf B_BG_SUCCESS() {
+        return CLASS("bg-success");
+    }
+
+    /**
+     * Similar to the contextual text color classes, easily set the background
+     * of an element to any contextual class. Anchor components will darken on
+     * hover, just like the text classes.
+     */
+    default TSelf B_BG_INFO() {
+        return CLASS("bg-info");
+    }
+
+    /**
+     * Similar to the contextual text color classes, easily set the background
+     * of an element to any contextual class. Anchor components will darken on
+     * hover, just like the text classes.
+     */
+    default TSelf B_BG_WARNING() {
+        return CLASS("bg-warning");
+    }
+
+    /**
+     * Similar to the contextual text color classes, easily set the background
+     * of an element to any contextual class. Anchor components will darken on
+     * hover, just like the text classes.
+     */
+    default TSelf B_BG_DANGER() {
+        return CLASS("bg-danger");
+    }
+
+    /**
+     * Use the generic close icon for dismissing content like modals and alerts.
+     */
+    default TSelf bCloseIcon() {
+        return button().TYPE("button").CLASS("close")
+                .addAttribute("aria-label", "Close").span()
+                .addAttribute("aria-hidden", "true").writeUnescaped("&times;")
+                ._span()._button();
+    }
+
+    /**
+     * Use carets to indicate dropdown functionality and direction. Note that
+     * the default caret will reverse automatically in dropup menus.
+     */
+    default TSelf bCaret() {
+        return span().CLASS("caret")._span();
+    }
+
+    /**
+     * Float an element to the left or right with a class. !important is
+     * included to avoid specificity issues.
+     */
+    default TSelf B_PULL_LEFT() {
+        return CLASS("pull-left");
+    }
+
+    /**
+     * Float an element to the left or right with a class. !important is
+     * included to avoid specificity issues.
+     */
+    default TSelf B_PULL_RIGHT() {
+        return CLASS("pull-right");
+    }
+
+    /**
+     * Set an element to display: block and center via margin. Available as a
+     * mixin and class.
+     */
+    default TSelf B_CENTER_BLOCK() {
+        return CLASS("center-block");
+    }
+
+    /**
+     * Easily clear floats by adding .clearfix to the parent element. Utilizes
+     * the micro clearfix as popularized by Nicolas Gallagher.
+     * 
+     * <pre>
+     * {@code
+     * <div class="clearfix">...</div>
+     * }
+     * </pre>
+     */
+    default TSelf B_CLEARFIX() {
+        return CLASS("clearfix");
     }
 
     /**
@@ -866,7 +1305,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * }
      * </pre>
      */
-    default TSelf B_FORM_XXX() {
+    default TSelf B_XXX() {
         return CLASS("");
     }
 }

@@ -62,4 +62,16 @@ public class BootstrapCanvasTest {
         canvas.bTable(x -> x.hover())._bTable();
         expect("<table class=\"table table-hover\"></table>");
     }
+
+    @Test
+    public void testBImg() throws Exception {
+        canvas.bImg(x -> x.circle())._bImg();
+        expect("<img class=\"img-circle\"></img>");
+    }
+
+    @Test
+    public void testBCloseIcon() throws Exception {
+        canvas.bCloseIcon();
+        expect("<button type=\"button\" aria-label=\"Close\" class=\"close\"><span aria-hidden=\"true\">&times;</span></button>");
+    }
 }

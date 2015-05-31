@@ -29,6 +29,10 @@ public class Html5CanvasTest {
         canvas.initialize(writer);
     }
 
+    private void expect(String str) {
+        assertEquals(str, writer.toString());
+    }
+
     @Test
     public void simple() {
         canvas.html()._html();
@@ -47,7 +51,10 @@ public class Html5CanvasTest {
         expect("<html id=\"foo\" class=\"Hello&#34;>World\"></html>");
     }
 
-    private void expect(String str) {
-        assertEquals(str, writer.toString());
+    @Test
+    public void meta() {
+        canvas.meta().CHARSET("utf-8").commitAttributes();
+        expect("<meta charset=\"utf-8\">");
     }
+
 }

@@ -68,7 +68,7 @@ public class Generator {
 
         out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
                 + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>\n"
-                + "        extends HtmlCanvas<TSelf> {\n");
+                + "        extends Html5CanvasBase<TSelf> {\n");
 
         HashSet<String> seenTags = new HashSet<>();
         for (HtmlElement element : std.elements) {
@@ -79,8 +79,8 @@ public class Generator {
                 out.write("/** No End Tag Allowed! <br>" + element.description
                         + "*/\n");
                 out.write("    default TSelf " + escapedTag + "() {\n"
-                        + "        return startTagWithoutEndTag(\""
-                        + element.tag + "\");\n    }\n");
+                        + "        return tagWithoutEndTag(\"" + element.tag
+                        + "\");\n    }\n");
             } else {
                 out.write("/** " + element.description + "*/\n");
                 out.write("    default TSelf " + escapedTag + "() {\n"

@@ -15,15 +15,6 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
     TSelf self();
 
     /**
-     * Add a class attribute. Multiple calls to this method are allowed. The
-     * supplied classes will be combined to one single attribute.
-     * */
-    default TSelf CLASS(String class_) {
-        internal_target().CLASS(class_);
-        return self();
-    }
-
-    /**
      * Start a tag, but keep the attributes open. All methods except
      * {@link #writeToAttributes(String)} and {@link #CLASS(String)} will commit
      * the attributes, causing the postAttributesFragment to be written.
@@ -32,14 +23,6 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
             String closeFragment) {
         internal_target().startTag(display, postAttributesFragment,
                 closeFragment);
-        return self();
-    }
-
-    /**
-     * Start a tag which does not have a corresponding end tag.
-     */
-    default TSelf startTagWithoutEndTag(String postAttributesFragment) {
-        internal_target().startTagWithoutEndTag(postAttributesFragment);
         return self();
     }
 
@@ -175,10 +158,13 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
     }
 
     /**
-     * Write the HTML5 doctype declaration
+     * Start a tag which does not have a corresponding end tag.
      */
-    default TSelf doctypeHtml5() {
-        writeUnescaped("<!DOCTYPE html>");
+    default TSelf tagWithoutEndTag(String tagName) {
+        if (tagName == null)
+            throw new RuntimeException("tagName is null");
+        writeUnescaped("<" + tagName);
+        internal_target().startTagWithoutEndTag(">");
         return self();
     }
 

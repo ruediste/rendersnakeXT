@@ -1,6 +1,6 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
-        extends HtmlCanvas<TSelf> {
+        extends Html5CanvasBase<TSelf> {
 /** The html element represents the root of an HTML document.*/
     default TSelf html() {
         return tag("html");
@@ -27,15 +27,15 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The base element allows authors to specify the document base URL for the purposes of resolving relative URLs, and the name of the default browsing context for the purposes of following hyperlinks. The element does not represent any content beyond this information.*/
     default TSelf base() {
-        return startTagWithoutEndTag("base");
+        return tagWithoutEndTag("base");
     }
 /** No End Tag Allowed! <br>The link element allows authors to link their document to other resources.*/
     default TSelf link() {
-        return startTagWithoutEndTag("link");
+        return tagWithoutEndTag("link");
     }
 /** No End Tag Allowed! <br>The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.*/
     default TSelf meta() {
-        return startTagWithoutEndTag("meta");
+        return tagWithoutEndTag("meta");
     }
 /** The style element allows authors to embed style information in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.*/
     default TSelf style() {
@@ -135,7 +135,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The hr element represents a paragraph-level thematic break, e.g. a scene change in a story, or a transition to another topic within a section of a reference book.*/
     default TSelf hr() {
-        return startTagWithoutEndTag("hr");
+        return tagWithoutEndTag("hr");
     }
 /** The pre element represents a block of preformatted text, in which structure is represented by typographic conventions rather than by elements.*/
     default TSelf pre() {
@@ -443,11 +443,11 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The br element represents a line break.*/
     default TSelf br() {
-        return startTagWithoutEndTag("br");
+        return tagWithoutEndTag("br");
     }
 /** No End Tag Allowed! <br>The wbr element represents a line break opportunity.*/
     default TSelf wbr() {
-        return startTagWithoutEndTag("wbr");
+        return tagWithoutEndTag("wbr");
     }
 /** The ins element represents an addition to the document.*/
     default TSelf ins() {
@@ -475,11 +475,11 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The authoring requirements in this section only apply if the source element has a parent that is a picture element.*/
     default TSelf source() {
-        return startTagWithoutEndTag("source");
+        return tagWithoutEndTag("source");
     }
 /** No End Tag Allowed! <br>An img element represents an image.*/
     default TSelf img() {
-        return startTagWithoutEndTag("img");
+        return tagWithoutEndTag("img");
     }
 /** The iframe element represents a nested browsing context.*/
     default TSelf iframe() {
@@ -491,7 +491,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The embed element provides an integration point for an external (typically non-HTML) application or interactive content.*/
     default TSelf embed() {
-        return startTagWithoutEndTag("embed");
+        return tagWithoutEndTag("embed");
     }
 /** The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image, as a nested browsing context, or as an external resource to be processed by a plugin.*/
     default TSelf object() {
@@ -503,7 +503,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The param element defines parameters for plugins invoked by object elements. It does not represent anything on its own.*/
     default TSelf param() {
-        return startTagWithoutEndTag("param");
+        return tagWithoutEndTag("param");
     }
 /** A video element is used for playing videos or movies, and audio files with captions.*/
     default TSelf video() {
@@ -523,7 +523,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.*/
     default TSelf track() {
-        return startTagWithoutEndTag("track");
+        return tagWithoutEndTag("track");
     }
 /** The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.*/
     default TSelf map() {
@@ -535,7 +535,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.*/
     default TSelf area() {
-        return startTagWithoutEndTag("area");
+        return tagWithoutEndTag("area");
     }
 /** The table element represents data with more than one dimension, in the form of a table.*/
     default TSelf table() {
@@ -563,7 +563,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.*/
     default TSelf col() {
-        return startTagWithoutEndTag("col");
+        return tagWithoutEndTag("col");
     }
 /** The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.*/
     default TSelf tbody() {
@@ -631,7 +631,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The input element represents a typed data field, usually with a form control to allow the user to edit the data.*/
     default TSelf input() {
-        return startTagWithoutEndTag("input");
+        return tagWithoutEndTag("input");
     }
 /** The button element represents a button labeled by its contents.*/
     default TSelf button() {
@@ -683,7 +683,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The keygen element represents a key pair generator control. When the control's form is submitted, the private key is stored in the local keystore, and the public key is packaged and sent to the server.*/
     default TSelf keygen() {
-        return startTagWithoutEndTag("keygen");
+        return tagWithoutEndTag("keygen");
     }
 /** The output element represents the result of a calculation performed by the application, or the result of a user action.*/
     default TSelf output() {
@@ -751,7 +751,7 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     }
 /** No End Tag Allowed! <br>The menuitem element represents a command that the user can invoke from a popup menu (either a context menu or the menu of a menu button).*/
     default TSelf menuitem() {
-        return startTagWithoutEndTag("menuitem");
+        return tagWithoutEndTag("menuitem");
     }
 /** The dialog element represents a part of an application that a user interacts with to perform a task, for example a dialog box, inspector, or window.*/
     default TSelf dialog() {
