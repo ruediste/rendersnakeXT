@@ -10,16 +10,12 @@ public abstract class HtmlCanvasBase<TSelf extends HtmlCanvasBase<TSelf>>
 
     private HtmlCanvasTarget target;
 
-    public void initialize(Writer writer) {
-        this.target = new HtmlCanvasTarget(writer);
+    protected void initialize(Writer writer) {
+        initialize(new HtmlCanvasTarget(writer));
     }
 
-    public void initialize(HtmlCanvasTarget target) {
+    protected void initialize(HtmlCanvasTarget target) {
         this.target = target;
-    }
-
-    public HtmlCanvasTarget getTarget() {
-        return internal_target();
     }
 
     @Override

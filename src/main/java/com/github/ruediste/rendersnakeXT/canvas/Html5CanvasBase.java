@@ -38,4 +38,11 @@ public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends
     default TSelf ARIA_EXPANDED(String value) {
         return addAttribute("aria-expanded", value);
     }
+
+    /**
+     * Render a span with the given icon
+     */
+    default TSelf icon(IconEnum icon) {
+        return self().span().CLASS(icon.cssClass())._span();
+    }
 }

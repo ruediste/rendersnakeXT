@@ -12,6 +12,12 @@ public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>> extends
         return self();
     }
 
+    default TSelf fIf(boolean condition, Runnable renderer) {
+        if (condition)
+            renderer.run();
+        return self();
+    }
+
     default <T> TSelf fForEach(Iterable<T> items, Consumer<? super T> renderer) {
         for (T item : items) {
             renderer.accept(item);
