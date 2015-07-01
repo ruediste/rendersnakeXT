@@ -1431,19 +1431,20 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
                     if (brand!=null){
                         brand.run();
                     }
-                _div();
-                content.run();
-            return _bContainer_fluid()
+                _div()
+                .div().CLASS("collapse navbar-collapse").ID(id);
+                    content.run();
+            return _div()._bContainer_fluid()
         ._nav();
         //@formatter:on
     }
 
     /**
-     * Normal navbar content
+     * an &lt;ul> containing normal navbar content
      * 
      * <pre>
      * {@code 
-     * <ul class="nav navbar-nav">
+     * html.bNavbarNav()
      *   <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
      *   <li><a href="#">Link</a></li>
      *   <li class="dropdown">
@@ -1456,7 +1457,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      *       <li><a href="#">Separated link</a></li>
      *     </ul>
      *   </li>
-     * </ul>
+     * ._bNavbarNav()
      * }
      * </pre>
      */
