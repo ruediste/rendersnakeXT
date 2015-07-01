@@ -1,7 +1,5 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-import java.io.IOException;
-
 import org.owasp.encoder.Encode;
 
 public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
@@ -16,8 +14,8 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
 
     /**
      * Start a tag, but keep the attributes open. All methods except
-     * {@link #writeToAttributes(String)} and {@link #CLASS(String)} will commit
-     * the attributes, causing the postAttributesFragment to be written.
+     * {@link #addAttribute(String, String)} will commit the attributes, causing
+     * the postAttributesFragment to be written.
      */
     default TSelf startTag(String display, String postAttributesFragment,
             String closeFragment) {
@@ -72,9 +70,9 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      *            String , HTML or plain text
      * @return HTMLCanvas , the receiver
      */
-    default TSelf writeUnescaped(CharactersWriteable str) {
+    default TSelf writeUnescaped(CharactersWriteable text) {
         commitAttributes();
-        internal_target().internal_writeUnescaped(str);
+        internal_target().internal_writeUnescaped(text);
         return self();
     }
 
@@ -85,8 +83,8 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      *            String , HTML or plain text
      * @return HTMLCanvas , the receiver
      */
-    default TSelf writeUnescaped(String str) {
-        return writeUnescaped(out -> out.write(str));
+    default TSelf writeUnescaped(String text) {
+        return writeUnescaped(out -> out.write(text));
     }
 
     /**
@@ -95,10 +93,9 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @param unescapedString
      *            String , HTML or plain text or null
      * @return HTMLCanvas , the receiver
-     * @throws IOException
      */
-    default TSelf write(String str) {
-        return writeUnescaped(Encode.forHtmlContent(str));
+    default TSelf write(String unescapedString) {
+        return writeUnescaped(Encode.forHtmlContent(unescapedString));
     }
 
     /**
@@ -107,10 +104,9 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @param unescapedString
      *            String , HTML or plain text or null
      * @return HTMLCanvas , the receiver
-     * @throws IOException
      */
-    default TSelf content(String str) {
-        return write(str).close();
+    default TSelf content(String unescapedString) {
+        return write(unescapedString).close();
     }
 
     /**
@@ -131,7 +127,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
     }
 
     /**
-     * Write the open tag &lt;{tagName}>. Requires close().
+     * Write the open tag &lt;{tagName}&gt;. Requires close().
      * 
      * @param tagName
      *            String, cannot be null
@@ -147,7 +143,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
     }
 
     /**
-     * Write the open tag &lt;{tagName}>. Requires close() or close with the
+     * Write the open tag &lt;{tagName}&gt;. Requires close() or close with the
      * given display name
      */
     default TSelf tag(String tagName, String displayName) {

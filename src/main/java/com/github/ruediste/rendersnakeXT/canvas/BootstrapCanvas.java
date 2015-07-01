@@ -58,7 +58,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         }
 
         /**
-         * Extra small devices Phones (<768px)
+         * Extra small devices Phones (&lt;768px)
          */
         public B_ColBuilder xs(int size) {
             return add("xs", size);
@@ -86,7 +86,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         }
 
         /**
-         * Extra small devices Phones (<768px)
+         * Extra small devices Phones (&lt;768px)
          */
         public B_ColBuilder xsOffset(int size) {
             return add("xs-offset", size);
@@ -114,7 +114,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         }
 
         /**
-         * Extra small devices Phones (<768px)
+         * Extra small devices Phones (&lt;768px)
          */
         public B_ColBuilder xsPull(int size) {
             return add("xs-pull", size);
@@ -142,7 +142,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
         }
 
         /**
-         * Extra small devices Phones (<768px)
+         * Extra small devices Phones (&lt;768px)
          */
         public B_ColBuilder xsPush(int size) {
             return add("xs-push", size);
@@ -230,8 +230,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Stylized implementation of HTML's &lt;abbr> element for abbreviations and
-     * acronyms to show the expanded version on hover. Abbreviations with a
+     * Stylized implementation of HTML's &lt;abbr&gt; element for abbreviations
+     * and acronyms to show the expanded version on hover. Abbreviations with a
      * title attribute have a light dotted bottom border and a help cursor on
      * hover, providing additional context on hover and to users of assistive
      * technologies.
@@ -331,7 +331,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     /**
      * For basic styling—light padding and only horizontal dividers.
      * <p>
-     * Add the base class .table to any &lt;table> . It may seem super
+     * Add the base class .table to any &lt;table&gt; . It may seem super
      * redundant, but given the widespread use of tables for other plugins like
      * calendars and date pickers, we've opted to isolate our custom table
      * styles.
@@ -343,7 +343,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     /**
      * For basic styling—light padding and only horizontal dividers.
      * <p>
-     * Add the base class .table to any &lt;table> . It may seem super
+     * Add the base class .table to any &lt;table&gt;. It may seem super
      * redundant, but given the widespread use of tables for other plugins like
      * calendars and date pickers, we've opted to isolate our custom table
      * styles.
@@ -427,8 +427,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * All textual &lt;input>, &lt;textarea>, and &lt;select> elements with
-     * .form-control are set to width: 100%; by default.
+     * All textual &lt;input&gt;, &lt;textarea&gt;, and &lt;select&gt; elements
+     * with .form-control are set to width: 100%; by default.
      * 
      * <pre>
      * {@code
@@ -473,9 +473,9 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Add .form-inline to your form (which doesn't have to be a &lt;form>) for
-     * left-aligned and inline-block controls. This only applies to forms within
-     * viewports that are at least 768px wide.
+     * Add .form-inline to your form (which doesn't have to be a &lt;form&gt;)
+     * for left-aligned and inline-block controls. This only applies to forms
+     * within viewports that are at least 768px wide.
      * 
      * <pre>
      * {@code
@@ -612,10 +612,10 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
     /**
      * A checkbox or radio with the disabled attribute will be styled
-     * appropriately. To have the &lt;label> for the checkbox or radio also
+     * appropriately. To have the &lt;label&gt; for the checkbox or radio also
      * display a "not-allowed" cursor when the user hovers over the label, add
      * the .disabled class to your .radio, .radio-inline, .checkbox,
-     * .checkbox-inline, or &lt;fieldset>.
+     * .checkbox-inline, or &lt;fieldset&gt;.
      * 
      * <pre>
      * {@code
@@ -705,7 +705,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
     /**
      * When you need to place plain text next to a form label within a form, use
-     * the .form-control-static class on a &lt;p>.
+     * the .form-control-static class on a &lt;p&gt;.
      * 
      * <pre>
      * {@code
@@ -786,7 +786,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * You can also add optional feedback icons with the addition of
      * .has-feedback and the right icon with {@link #B_FORM_CONTROL_FEEDBACK()}
      * 
-     * Feedback icons only work with textual &lt;input class="form-control">
+     * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
      * 
      * 
@@ -809,7 +809,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * You can also add optional feedback icons with the addition of
      * {@link #B_HAS_FEEDBACK()} and the right icon with .form-control-feedback.
      * 
-     * Feedback icons only work with textual &lt;input class="form-control">
+     * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
      * 
      * 
@@ -928,7 +928,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
      * Block level help text for form controls.
      * 
      * <p>
-     * <b> Associating help text with form controls </b><br/>
+     * <b> Associating help text with form controls </b><br>
      * Help text should be explicitly associated with the form control it
      * relates to using the aria-describedby attribute. This will ensure that
      * assistive technologies – such as screen readers – will announce this help
@@ -1028,9 +1028,9 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
         /**
          * Buttons will appear pressed (with a darker background, darker border,
-         * and inset shadow) when active. For &lt;button> elements, this is done
-         * via :active. For &lt;a> elements, it's done with .active. However,
-         * you may use .active on &lt;button>s (and include the
+         * and inset shadow) when active. For &lt;button&gt; elements, this is
+         * done via :active. For &lt;a&gt; elements, it's done with .active.
+         * However, you may use .active on &lt;button&gt;s (and include the
          * aria-pressed="true" attribute) should you need to replicate the
          * active state programmatically.
          */
@@ -1081,7 +1081,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Create a link (&lt;a>) styled as button
+     * Create a link (&lt;a&gt;) styled as button
      */
     default TSelf bButtonA() {
         return bButtonA(x -> {
@@ -1089,7 +1089,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Create a link (&lt;a>) styled as button
+     * Create a link (&lt;a&gt;) styled as button
      */
     default TSelf bButtonA(Consumer<B_ButtonArgs> args) {
         TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role",
@@ -1160,7 +1160,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1170,7 +1170,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1180,7 +1180,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1190,7 +1190,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1200,7 +1200,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1210,7 +1210,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Contextual colors <br/>
+     * Contextual colors <br>
      * Convey meaning through color with a handful of emphasis utility classes.
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
@@ -1347,8 +1347,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
          * <p>
          * Body padding required <br>
          * The fixed navbar will overlay your other content, unless you add
-         * padding to the top of the &lt;body>. Try out your own values or use
-         * our snippet below. Tip: By default, the navbar is 50px high.
+         * padding to the top of the &lt;body&gt;. Try out your own values or
+         * use our snippet below. Tip: By default, the navbar is 50px high.
          * 
          * <pre>
          * body { padding-top: 70px; }
@@ -1367,8 +1367,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
          * <p>
          * Body padding required <br>
          * The fixed navbar will overlay your other content, unless you add
-         * padding to the top of the &lt;body>. Try out your own values or use
-         * our snippet below. Tip: By default, the navbar is 50px high.
+         * padding to the top of the &lt;body&gt;. Try out your own values or
+         * use our snippet below. Tip: By default, the navbar is 50px high.
          * 
          * <pre>
          * body { padding-top: 70px; }
@@ -1397,8 +1397,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
 
     /**
      * To be used with
-     * {@link BootstrapCanvas#bNavbar(Consumer, Runnable, Runnable)} to render
-     * the brand.
+     * {@link BootstrapCanvas#bNavbar(String, Consumer, Runnable, Runnable)} to
+     * render the brand.
      * 
      * <pre>
      * html.a().BNavbarBrand().href(...).content(...)
@@ -1440,7 +1440,7 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * an &lt;ul> containing normal navbar content
+     * an &lt;ul&gt; containing normal navbar content
      * 
      * <pre>
      * {@code 
@@ -1509,8 +1509,8 @@ public interface BootstrapCanvas<TSelf extends BootstrapCanvas<TSelf>> extends
     }
 
     /**
-     * Add the .navbar-btn class to <button> elements not residing in a <form>
-     * to vertically center them in the navbar.
+     * Add the .navbar-btn class to &lt;button&gt; elements not residing in a
+     * &lt;form&gt; to vertically center them in the navbar.
      * 
      * <pre>
      * {@code
