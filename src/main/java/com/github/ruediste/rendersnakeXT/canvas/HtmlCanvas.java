@@ -88,6 +88,14 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
     }
 
     /**
+     * Write directly to this canvas, without commiting attributes.
+     */
+    default TSelf writeUnescapedWithoutAttributeCommiting(String text) {
+        internal_writeUnescaped(text);
+        return self();
+    }
+
+    /**
      * Write text after HTML escaping it. No need to close().
      * 
      * @param unescapedString
