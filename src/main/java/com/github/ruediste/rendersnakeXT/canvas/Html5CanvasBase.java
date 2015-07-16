@@ -38,4 +38,49 @@ public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends
     default TSelf ARIA_EXPANDED(String value) {
         return addAttribute("aria-expanded", value);
     }
+
+    /** These elements represent headings for their sections. */
+    default TSelf h2() {
+        return tag("h2");
+    }
+
+    default TSelf _h2() {
+        return close("h2");
+    }
+
+    /** These elements represent headings for their sections. */
+    default TSelf h3() {
+        return tag("h3");
+    }
+
+    default TSelf _h3() {
+        return close("h3");
+    }
+
+    /** These elements represent headings for their sections. */
+    default TSelf h4() {
+        return tag("h4");
+    }
+
+    default TSelf _h4() {
+        return close("h4");
+    }
+
+    /** These elements represent headings for their sections. */
+    default TSelf h5() {
+        return tag("h5");
+    }
+
+    default TSelf _h5() {
+        return close("h5");
+    }
+
+    /** These elements represent headings for their sections. */
+    default TSelf h6() {
+        return tag("h6");
+    }
+
+    default TSelf _h6() {
+        return close("h6");
+    }
 }
