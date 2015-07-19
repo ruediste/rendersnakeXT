@@ -24,15 +24,30 @@ public class Generator {
                 "index.html"));
 
         OutputStreamWriter out = openWriter("Html5Canvas");
+        out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
+                + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>\n"
+                + "        extends Html5CanvasBase<TSelf> {\n");
+
         generateTags(std, out);
         generateAttrs(std, out);
+        generateInputs(std, out);
+
+        out.write("}\n" + "");
+        out.close();
+    }
+
+    private void generateInputs(HtmlStandard std, OutputStreamWriter out) {
+        if (element.endTagOmissed) {
+            out.write("/** No End Tag Allowed! <br>" + element.description
+                    + "*/\n");
+            out.write("    default TSelf " + escapedTag + "() {\n"
+                    + "        return tagWithoutEndTag(\"" + element.tag
+                    + "\");\n    }\n");
+        }
     }
 
     private void generateAttrs(HtmlStandard std, OutputStreamWriter out)
             throws Throwable {
-        // out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
-        // +
-        // "public interface Html5Attributes<TAttr> extends HtmlAttributes<TAttr> {\n");
 
         HashSet<String> seenAttributes = new HashSet<>();
         seenAttributes.add("class"); // suppress generation of the class
@@ -52,8 +67,7 @@ public class Generator {
                 generateAttribute(out, attr);
             }
         }
-        out.write("}\n" + "");
-        out.close();
+
     }
 
     private void generateAttribute(OutputStreamWriter out, HtmlAttribute attr)
@@ -67,10 +81,6 @@ public class Generator {
 
     private void generateTags(HtmlStandard std, OutputStreamWriter out)
             throws Throwable {
-
-        out.write("package com.github.ruediste.rendersnakeXT.canvas;\n"
-                + "public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>\n"
-                + "        extends Html5CanvasBase<TSelf> {\n");
 
         HashSet<String> seenTags = new HashSet<>();
         for (HtmlElement element : std.elements) {
