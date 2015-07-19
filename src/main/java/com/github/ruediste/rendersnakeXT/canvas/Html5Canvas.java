@@ -1577,4 +1577,96 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
     default TSelf DEFER(String DEFER) {
         return addAttribute("defer", DEFER);
     }
+/** No End Tag Allowed! <br> Input element with type hidden<br> Data Type: An arbitrary string<br> Control Type: n/a */
+    default TSelf input_hidden() {
+        return tagWithoutEndTag("input").TYPE("hidden");
+    }
+/** No End Tag Allowed! <br> Input element with type text<br> Data Type: Text with no line breaks<br> Control Type: A text field */
+    default TSelf input_text() {
+        return tagWithoutEndTag("input").TYPE("text");
+    }
+/** No End Tag Allowed! <br> Input element with type search<br> Data Type: Text with no line breaks<br> Control Type: Search field */
+    default TSelf input_search() {
+        return tagWithoutEndTag("input").TYPE("search");
+    }
+/** No End Tag Allowed! <br> Input element with type tel<br> Data Type: Text with no line breaks<br> Control Type: A text field */
+    default TSelf input_tel() {
+        return tagWithoutEndTag("input").TYPE("tel");
+    }
+/** No End Tag Allowed! <br> Input element with type url<br> Data Type: An absolute URL<br> Control Type: A text field */
+    default TSelf input_url() {
+        return tagWithoutEndTag("input").TYPE("url");
+    }
+/** No End Tag Allowed! <br> Input element with type email<br> Data Type: An e-mail address or list of e-mail addresses<br> Control Type: A text field */
+    default TSelf input_email() {
+        return tagWithoutEndTag("input").TYPE("email");
+    }
+/** No End Tag Allowed! <br> Input element with type password<br> Data Type: Text with no line breaks (sensitive information)<br> Control Type: A text field that obscures data entry */
+    default TSelf input_password() {
+        return tagWithoutEndTag("input").TYPE("password");
+    }
+/** No End Tag Allowed! <br> Input element with type datetime<br> Data Type: A date and time (year, month, day, hour, minute, second, fraction of a second) with the time zone set to UTC<br> Control Type: A date and time control */
+    default TSelf input_datetime() {
+        return tagWithoutEndTag("input").TYPE("datetime");
+    }
+/** No End Tag Allowed! <br> Input element with type date<br> Data Type: A date (year, month, day) with no time zone<br> Control Type: A date control */
+    default TSelf input_date() {
+        return tagWithoutEndTag("input").TYPE("date");
+    }
+/** No End Tag Allowed! <br> Input element with type month<br> Data Type: A date consisting of a year and a month with no time zone<br> Control Type: A month control */
+    default TSelf input_month() {
+        return tagWithoutEndTag("input").TYPE("month");
+    }
+/** No End Tag Allowed! <br> Input element with type week<br> Data Type: A date consisting of a week-year number and a week number with no time zone<br> Control Type: A week control */
+    default TSelf input_week() {
+        return tagWithoutEndTag("input").TYPE("week");
+    }
+/** No End Tag Allowed! <br> Input element with type time<br> Data Type: A time (hour, minute, seconds, fractional seconds) with no time zone<br> Control Type: A time control */
+    default TSelf input_time() {
+        return tagWithoutEndTag("input").TYPE("time");
+    }
+/** No End Tag Allowed! <br> Input element with type datetime-local<br> Data Type: A date and time (year, month, day, hour, minute, second, fraction of a second) with no time zone<br> Control Type: A date and time control */
+    default TSelf input_datetime_local() {
+        return tagWithoutEndTag("input").TYPE("datetime-local");
+    }
+/** No End Tag Allowed! <br> Input element with type number<br> Data Type: A numerical value<br> Control Type: A text field or spinner control */
+    default TSelf input_number() {
+        return tagWithoutEndTag("input").TYPE("number");
+    }
+/** No End Tag Allowed! <br> Input element with type range<br> Data Type: A numerical value, with the extra semantic that the exact value is not important<br> Control Type: A slider control or similar */
+    default TSelf input_range() {
+        return tagWithoutEndTag("input").TYPE("range");
+    }
+/** No End Tag Allowed! <br> Input element with type color<br> Data Type: An sRGB colour with 8-bit red, green, and blue components<br> Control Type: A colour well */
+    default TSelf input_color() {
+        return tagWithoutEndTag("input").TYPE("color");
+    }
+/** No End Tag Allowed! <br> Input element with type checkbox<br> Data Type: A set of zero or more values from a predefined list<br> Control Type: A checkbox */
+    default TSelf input_checkbox() {
+        return tagWithoutEndTag("input").TYPE("checkbox");
+    }
+/** No End Tag Allowed! <br> Input element with type radio<br> Data Type: An enumerated value<br> Control Type: A radio button */
+    default TSelf input_radio() {
+        return tagWithoutEndTag("input").TYPE("radio");
+    }
+/** No End Tag Allowed! <br> Input element with type file<br> Data Type: Zero or more files each with a MIME type and optionally a file name<br> Control Type: A label and a button */
+    default TSelf input_file() {
+        return tagWithoutEndTag("input").TYPE("file");
+    }
+/** No End Tag Allowed! <br> Input element with type submit<br> Data Type: An enumerated value, with the extra semantic that it must be the last value selected and initiates form submission<br> Control Type: A button */
+    default TSelf input_submit() {
+        return tagWithoutEndTag("input").TYPE("submit");
+    }
+/** No End Tag Allowed! <br> Input element with type image<br> Data Type: A coordinate, relative to a particular image's size, with the extra semantic that it must be the last value selected and initiates form submission<br> Control Type: Either a clickable image, or a button */
+    default TSelf input_image() {
+        return tagWithoutEndTag("input").TYPE("image");
+    }
+/** No End Tag Allowed! <br> Input element with type reset<br> Data Type: n/a<br> Control Type: A button */
+    default TSelf input_reset() {
+        return tagWithoutEndTag("input").TYPE("reset");
+    }
+/** No End Tag Allowed! <br> Input element with type button<br> Data Type: n/a<br> Control Type: A button */
+    default TSelf input_button() {
+        return tagWithoutEndTag("input").TYPE("button");
+    }
 }

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import com.github.ruediste.html5.std.HtmlAttribute;
 import com.github.ruediste.html5.std.HtmlElement;
 import com.github.ruediste.html5.std.HtmlStandard;
+import com.github.ruediste.html5.std.InputType;
 import com.github.ruediste.html5.std.parser.Parser;
 
 /**
@@ -36,13 +37,17 @@ public class Generator {
         out.close();
     }
 
-    private void generateInputs(HtmlStandard std, OutputStreamWriter out) {
-        if (element.endTagOmissed) {
-            out.write("/** No End Tag Allowed! <br>" + element.description
-                    + "*/\n");
-            out.write("    default TSelf " + escapedTag + "() {\n"
-                    + "        return tagWithoutEndTag(\"" + element.tag
-                    + "\");\n    }\n");
+    private void generateInputs(HtmlStandard std, OutputStreamWriter out)
+            throws IOException {
+        for (InputType type : std.inputTypes) {
+
+            out.write("/** No End Tag Allowed! <br> Input element with type "
+                    + type.name + "<br> Data Type: " + type.dataType
+                    + "<br> Control Type: " + type.controlType + " */\n");
+            out.write("    default TSelf "
+                    + escapeToFunctionName("input_" + type.name) + "() {\n"
+                    + "        return tagWithoutEndTag(\"input\").TYPE(\""
+                    + type.name + "\");\n    }\n");
         }
     }
 
