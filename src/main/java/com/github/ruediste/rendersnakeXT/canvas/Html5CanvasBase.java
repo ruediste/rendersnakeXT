@@ -83,4 +83,8 @@ public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends
     default TSelf _h6() {
         return close("h6");
     }
+
+    default TSelf ARIA_HIDDEN() {
+        return addAttribute("aria-hidden", "true");
+    }
 }

@@ -1044,17 +1044,18 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Create a button. For links, use {@link #bButtonA()}
      */
     default TSelf bButton() {
-        return bButton(x -> {
-        });
+        return bButton(null);
     }
 
     /**
-     * Create a button. For links, use {@link #bButtonA()}
+     * Create a button. For links, use {@link #bButtonA()}. Args defines various
+     * button arguments. May be null.
      */
     default TSelf bButton(Consumer<B_ButtonArgs> args) {
         TSelf result = tag("button", "bButton").CLASS("btn").TYPE("button");
         B_ButtonArgs tmp = new B_ButtonArgs(result, false);
-        args.accept(tmp);
+        if (args != null)
+            args.accept(tmp);
         if (!tmp.styleSet) {
             result.CLASS("btn-default");
         }

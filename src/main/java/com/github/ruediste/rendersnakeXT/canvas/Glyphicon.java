@@ -36,6 +36,6 @@ public enum Glyphicon implements Renderable<Html5Canvas<?>> {
 
     @Override
     public void renderOn(Html5Canvas<?> html) {
-        html.span().CLASS(cssClass())._span();
+        html.span().CLASS(cssClass()).ARIA_HIDDEN()._span();
     }
 }
