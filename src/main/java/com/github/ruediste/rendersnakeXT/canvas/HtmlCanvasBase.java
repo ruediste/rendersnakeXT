@@ -23,4 +23,9 @@ public abstract class HtmlCanvasBase<TSelf extends HtmlCanvasBase<TSelf>>
         return target;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public TSelf self() {
+        return (TSelf) this;
+    }
 }

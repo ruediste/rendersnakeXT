@@ -39,6 +39,15 @@ public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>> extends
     /**
      * Supply a value to a renderer. This allows the inline definition of a
      * local variable.
+     * 
+     * <pre>
+     * {@code
+     * html.fWith(util.complexCalculation(), value -> html
+     *   .write(value.getX())
+     *   .write(value.getY())
+     * );
+     * }
+     * </pre>
      */
     default <T> TSelf fWith(T value, Consumer<T> renderer) {
         renderer.accept(value);
