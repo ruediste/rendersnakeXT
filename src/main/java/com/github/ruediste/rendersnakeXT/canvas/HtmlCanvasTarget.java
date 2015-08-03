@@ -79,7 +79,7 @@ public class HtmlCanvasTarget {
 
     public void startTagWithoutEndTag(String postAttributesFragment) {
         commitAttributes();
-        this.postAttributesFragment = postAttributesFragment;
+        this.postAttributesFragment = postAttributesFragment + " ";
     }
 
     public void startTag(String display, String postAttributesFragment,
@@ -91,7 +91,9 @@ public class HtmlCanvasTarget {
 
     public void addAttribute(String key, String value) {
         checkAttributesUncommited();
-        internal_writeUnescaped(" " + key + "=\"");
+        internal_writeUnescaped(" ");
+        internal_writeUnescaped(key);
+        internal_writeUnescaped("=\"");
         internal_writeUnescaped(Encode.forHtmlAttribute(value));
         internal_writeUnescaped("\"");
     }
@@ -126,6 +128,7 @@ public class HtmlCanvasTarget {
         if (openTagStack.isEmpty())
             throw new RuntimeException("Empty Stack");
         writeUnescaped(openTagStack.remove(openTagStack.size() - 1).closeFragment);
+        writeUnescaped(" ");
     }
 
     public void close(String expectedDisplay) {
@@ -136,6 +139,7 @@ public class HtmlCanvasTarget {
             throw new RuntimeException("Expected to close \"" + expectedDisplay
                     + "\" but \"" + popped.display + "\" was started");
         writeUnescaped(popped.closeFragment);
+        writeUnescaped(" ");
     }
 
     public void flush() {

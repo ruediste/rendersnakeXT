@@ -1081,7 +1081,8 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
         TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role",
                 "button");
         B_ButtonArgs tmp = new B_ButtonArgs(result, true);
-        args.accept(tmp);
+        if (args != null)
+            args.accept(tmp);
         if (!tmp.styleSet) {
             result.CLASS("btn-default");
         }
