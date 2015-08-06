@@ -36,25 +36,25 @@ public class Html5CanvasTest {
     @Test
     public void simple() {
         canvas.html()._html();
-        expect("<html></html>");
+        expect("<html></html> ");
     }
 
     @Test
     public void simpleWithId() {
         canvas.html().ID("foo")._html();
-        expect("<html id=\"foo\"></html>");
+        expect("<html id=\"foo\"></html> ");
     }
 
     @Test
     public void simpleWithIdAndClass() {
         canvas.html().ID("foo").CLASS("Hello\">World")._html();
-        expect("<html id=\"foo\" class=\"Hello&#34;>World\"></html>");
+        expect("<html id=\"foo\" class=\"Hello&#34;>World\"></html> ");
     }
 
     @Test
     public void meta() {
         canvas.meta().CHARSET("utf-8").commitAttributes();
-        expect("<meta charset=\"utf-8\">");
+        expect("<meta charset=\"utf-8\"> ");
     }
 
 }

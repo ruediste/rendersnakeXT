@@ -33,7 +33,7 @@ public class HtmlCanvasTest {
     @Test
     public void simple() {
         canvas.tag("html").close();
-        assertEquals("<html></html>", writer.toString());
+        assertEquals("<html></html> ", writer.toString());
     }
 
     @Test
@@ -45,14 +45,14 @@ public class HtmlCanvasTest {
     @Test
     public void withAttrs() {
         canvas.tag("html").addAttribute("id", "foo").close();
-        assertEquals("<html id=\"foo\"></html>", writer.toString());
+        assertEquals("<html id=\"foo\"></html> ", writer.toString());
     }
 
     @Test
     public void repeatedClasses() throws IOException {
         canvas.tag("html").CLASS("foo").addAttribute("id", "bar").CLASS("foo2")
                 .close();
-        assertEquals("<html id=\"bar\" class=\"foo foo2\"></html>",
+        assertEquals("<html id=\"bar\" class=\"foo foo2\"></html> ",
                 writer.toString());
     }
 }
