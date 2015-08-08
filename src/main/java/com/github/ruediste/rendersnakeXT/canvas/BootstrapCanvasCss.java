@@ -251,7 +251,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * A list of terms with their associated descriptions.
-     * 
+     *
      * <pre>
      * html.bDl().dt().content("Horse").dd().content("an Animal") ... ._bDl();
      * </pre>
@@ -266,7 +266,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * A list of terms with their associated descriptions, lined up side-by-side
-     * 
+     *
      * <pre>
      * html.bDlHorizontal().dt().content("Horse").dd().content("an Animal") ... ._bDl();
      * </pre>
@@ -414,7 +414,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     /**
      * All textual &lt;input&gt;, &lt;textarea&gt;, and &lt;select&gt; elements
      * with .form-control are set to width: 100%; by default.
-     * 
+     *
      * <pre>
      * {@code
      * <form>
@@ -426,17 +426,17 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * </form>
      * }
      * </pre>
-     * 
+     *
      */
-    default TSelf B_FORM_CONTROL() {
+    default TSelf BformControl() {
         return CLASS("form-control");
     }
 
     /**
      * Wrap labels and controls in .form-group for optimum spacing. <br>
-     * Do not mix form groups directly with {@link #B_INPUT_GROUP()}s. Instead,
+     * Do not mix form groups directly with {@link #BinputGroup()}s. Instead,
      * nest the input group inside of the form group.
-     * 
+     *
      * <pre>
      * {@code
      * <form>
@@ -461,7 +461,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Add .form-inline to your form (which doesn't have to be a &lt;form&gt;)
      * for left-aligned and inline-block controls. This only applies to forms
      * within viewports that are at least 768px wide.
-     * 
+     *
      * <pre>
      * {@code
      * <form class="form-inline">
@@ -474,54 +474,8 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_INLINE() {
+    default TSelf BformInline() {
         return CLASS("form-inline");
-    }
-
-    /**
-     * Group inputs and {@link #B_INPUT_GROUP_ADDON()} s together
-     * 
-     * <pre>
-     * {@code
-     * <form class="form-inline">
-     *   <div class="form-group">
-     *     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-     *     <div class="input-group">
-     *       <div class="input-group-addon">$</div>
-     *       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-     *       <div class="input-group-addon">.00</div>
-     *     </div>
-     *   </div>
-     *   <button type="submit" class="btn btn-primary">Transfer cash</button>
-     * </form>
-     * }
-     * </pre>
-     */
-    default TSelf B_INPUT_GROUP() {
-        return CLASS("input-group");
-    }
-
-    /**
-     * place a div directly adjacent to an input
-     * 
-     * <pre>
-     * {@code
-     * <form class="form-inline">
-     *   <div class="form-group">
-     *     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-     *     <div class="input-group">
-     *       <div class="input-group-addon">$</div>
-     *       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-     *       <div class="input-group-addon">.00</div>
-     *     </div>
-     *   </div>
-     *   <button type="submit" class="btn btn-primary">Transfer cash</button>
-     * </form>
-     * }
-     * </pre>
-     */
-    default TSelf B_INPUT_GROUP_ADDON() {
-        return CLASS("input-group-addon");
     }
 
     /**
@@ -529,7 +483,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * form controls in a horizontal layout by adding .form-horizontal to
      * override the form (which doesn't have to be a {@code <form>}). Doing so
      * changes .form-groups to behave as grid rows, so no need for .row.
-     * 
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -544,13 +498,13 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_HORIZONTAL() {
+    default TSelf BformHorizontal() {
         return CLASS("form-horizontal");
     }
 
     /**
-     * Use this for labels together with {@link #B_FORM_HORIZONTAL()}
-     * 
+     * Use this for labels together with {@link #BformHorizontal()}
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -571,8 +525,8 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     }
 
     /**
-     * Use this for labels together with {@link #B_FORM_HORIZONTAL()}
-     * 
+     * Use this for labels together with {@link #BformHorizontal()}
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -601,7 +555,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * display a "not-allowed" cursor when the user hovers over the label, add
      * the .disabled class to your .radio, .radio-inline, .checkbox,
      * .checkbox-inline, or &lt;fieldset&gt;.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="checkbox">
@@ -638,14 +592,14 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_DISABLED() {
+    default TSelf Bdisabled() {
         return CLASS("disabled");
     }
 
     /**
      * Use the .checkbox-inline on a series of checkboxes for controls that
      * appear on the same line.
-     * 
+     *
      * <pre>
      * {@code
      * <label class="checkbox-inline">
@@ -661,14 +615,14 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_CHECKBOX_INLINE() {
+    default TSelf BcheckboxInline() {
         return CLASS("checkbox-inline");
     }
 
     /**
      * Use the .radio-inline on a series of radios for controls that appear on
      * the same line.
-     * 
+     *
      * <pre>
      * {@code
      * <label class="radio-inline">
@@ -684,14 +638,14 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_RADIO_INLINE() {
+    default TSelf BradioInline() {
         return CLASS("radio-inline");
     }
 
     /**
      * When you need to place plain text next to a form label within a form, use
      * the .form-control-static class on a &lt;p&gt;.
-     * 
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -706,7 +660,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_CONTROL_STATIC() {
+    default TSelf BformControlStatic() {
         return CLASS("form-control-static");
     }
 
@@ -715,7 +669,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * states on form controls. To use, add .has-warning, .has-error, or
      * .has-success to the parent element. Any .control-label, .form-control,
      * and .help-block within that element will receive the validation styles.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="form-group has-success">
@@ -725,7 +679,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_HAS_SUCCESS() {
+    default TSelf BhasSuccess() {
         return CLASS("has-success");
     }
 
@@ -734,7 +688,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * states on form controls. To use, add .has-warning, .has-error, or
      * .has-success to the parent element. Any .control-label, .form-control,
      * and .help-block within that element will receive the validation styles.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="form-group has-success">
@@ -744,7 +698,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_HAS_WARNING() {
+    default TSelf BhasWarning() {
         return CLASS("has-warning");
     }
 
@@ -753,7 +707,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * states on form controls. To use, add .has-warning, .has-error, or
      * .has-success to the parent element. Any .control-label, .form-control,
      * and .help-block within that element will receive the validation styles.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="form-group has-success">
@@ -763,18 +717,18 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_HAS_ERROR() {
+    default TSelf BhasError() {
         return CLASS("has-error");
     }
 
     /**
      * You can also add optional feedback icons with the addition of
      * .has-feedback and the right icon with {@link #B_FORM_CONTROL_FEEDBACK()}
-     * 
+     *
      * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
-     * 
-     * 
+     *
+     *
      * <pre>
      * {@code
      * <div class="form-group has-success has-feedback">
@@ -786,18 +740,18 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_HAS_FEEDBACK() {
+    default TSelf BhasFeedback() {
         return CLASS("has-feedback");
     }
 
     /**
      * You can also add optional feedback icons with the addition of
      * {@link #B_HAS_FEEDBACK()} and the right icon with .form-control-feedback.
-     * 
+     *
      * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
-     * 
-     * 
+     *
+     *
      * <pre>
      * {@code
      * <div class="form-group has-success has-feedback">
@@ -809,14 +763,14 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_CONTROL_FEEDBACK() {
+    default TSelf BformControlFeedback() {
         return CLASS("form-control-feedback");
     }
 
     /**
      * Create taller or shorter form controls that match button sizes. Use
      * {@link #B_FORM_GROUP_LG()} for horizontal forms
-     * 
+     *
      * <pre>
      * {@code
      * <input class="form-control input-lg" type="text" placeholder=".input-lg">
@@ -829,14 +783,14 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_INPUT_LG() {
+    default TSelf BinputLg() {
         return CLASS("input-lg");
     }
 
     /**
      * Create taller or shorter form controls that match button sizes. Use
      * {@link #B_FORM_GROUP_SM()} for horizontal forms
-     * 
+     *
      * <pre>
      * {@code
      * <input class="form-control input-lg" type="text" placeholder=".input-lg">
@@ -849,7 +803,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_INPUT_SM() {
+    default TSelf BinputSm() {
         return CLASS("input-sm");
     }
 
@@ -857,7 +811,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Quickly size labels and form controls within .form-horizontal by adding
      * .form-group-lg or .form-group-sm. Use {@link #B_INPUT_LG()} for normal
      * forms
-     * 
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -877,7 +831,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_GROUP_LG() {
+    default TSelf BformGroupLg() {
         return CLASS("form-group-lg");
     }
 
@@ -885,7 +839,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Quickly size labels and form controls within .form-horizontal by adding
      * .form-group-lg or .form-group-sm. Use {@link #B_INPUT_SM()} for normal
      * forms
-     * 
+     *
      * <pre>
      * {@code
      * <form class="form-horizontal">
@@ -905,20 +859,20 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_FORM_GROUP_SM() {
+    default TSelf BformGroupSm() {
         return CLASS("form-group-sm");
     }
 
     /**
      * Block level help text for form controls.
-     * 
+     *
      * <p>
      * <b> Associating help text with form controls </b><br>
      * Help text should be explicitly associated with the form control it
      * relates to using the aria-describedby attribute. This will ensure that
      * assistive technologies – such as screen readers – will announce this help
      * text when the user focuses or enters the control.
-     * 
+     *
      * <pre>
      * {@code
      * <label class="sr-only" for="inputHelpBlock">Input with help text</label>
@@ -928,7 +882,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf B_HELP_BLOCK() {
+    default TSelf BhelpBlock() {
         return CLASS("help-block");
     }
 
@@ -1152,7 +1106,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_MUTED() {
+    default TSelf BtextMuted() {
         return CLASS("text-muted");
     }
 
@@ -1162,7 +1116,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_PRIMARY() {
+    default TSelf BtextPrimary() {
         return CLASS("text-primary");
     }
 
@@ -1172,7 +1126,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_SUCCESS() {
+    default TSelf BtextSuccess() {
         return CLASS("text-success");
     }
 
@@ -1182,7 +1136,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_INFO() {
+    default TSelf BtextInfo() {
         return CLASS("text-info");
     }
 
@@ -1192,7 +1146,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_WARNING() {
+    default TSelf BtextWarning() {
         return CLASS("text-warning");
     }
 
@@ -1202,7 +1156,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * These may also be applied to links and will darken on hover just like our
      * default link styles.
      */
-    default TSelf B_TEXT_DANGER() {
+    default TSelf BtextDanger() {
         return CLASS("text-danger");
     }
 
@@ -1211,7 +1165,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * of an element to any contextual class. Anchor components will darken on
      * hover, just like the text classes.
      */
-    default TSelf B_BG_PRIMARY() {
+    default TSelf BbgPrimary() {
         return CLASS("bg-primary");
     }
 
@@ -1220,7 +1174,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * of an element to any contextual class. Anchor components will darken on
      * hover, just like the text classes.
      */
-    default TSelf B_BG_SUCCESS() {
+    default TSelf BbgSuccess() {
         return CLASS("bg-success");
     }
 
@@ -1229,7 +1183,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * of an element to any contextual class. Anchor components will darken on
      * hover, just like the text classes.
      */
-    default TSelf B_BG_INFO() {
+    default TSelf BbgInfo() {
         return CLASS("bg-info");
     }
 
@@ -1238,7 +1192,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * of an element to any contextual class. Anchor components will darken on
      * hover, just like the text classes.
      */
-    default TSelf B_BG_WARNING() {
+    default TSelf BbgWarning() {
         return CLASS("bg-warning");
     }
 
@@ -1247,7 +1201,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * of an element to any contextual class. Anchor components will darken on
      * hover, just like the text classes.
      */
-    default TSelf B_BG_DANGER() {
+    default TSelf BbgDanger() {
         return CLASS("bg-danger");
     }
 
@@ -1273,7 +1227,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Float an element to the left or right with a class. !important is
      * included to avoid specificity issues.
      */
-    default TSelf B_PULL_LEFT() {
+    default TSelf BpullLeft() {
         return CLASS("pull-left");
     }
 
@@ -1281,7 +1235,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Float an element to the left or right with a class. !important is
      * included to avoid specificity issues.
      */
-    default TSelf B_PULL_RIGHT() {
+    default TSelf BpullRight() {
         return CLASS("pull-right");
     }
 
@@ -1289,21 +1243,21 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Set an element to display: block and center via margin. Available as a
      * mixin and class.
      */
-    default TSelf B_CENTER_BLOCK() {
+    default TSelf BcenterBlock() {
         return CLASS("center-block");
     }
 
     /**
      * Easily clear floats by adding .clearfix to the parent element. Utilizes
      * the micro clearfix as popularized by Nicolas Gallagher.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="clearfix">...</div>
      * }
      * </pre>
      */
-    default TSelf B_CLEARFIX() {
+    default TSelf Bclearfix() {
         return CLASS("clearfix");
     }
 
@@ -1312,7 +1266,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * with the use of .show and .hidden classes. These classes use !important
      * to avoid specificity conflicts, just like the quick floats. They are only
      * available for block level toggling.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="show">...</div>
@@ -1329,7 +1283,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * with the use of .show and .hidden classes. These classes use !important
      * to avoid specificity conflicts, just like the quick floats. They are only
      * available for block level toggling.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="show">...</div>
@@ -1345,7 +1299,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * .invisible can be used to toggle only the visibility of an element,
      * meaning its display is not modified and the element can still affect the
      * flow of the document.
-     * 
+     *
      * <pre>
      * {@code
      * <div class="show">...</div>
@@ -1368,7 +1322,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Hide an element to all devices except screen reader and ensure that the
      * link becomes visible once focused (for sighted keyboard users). combines
      * {@code sr-only} and {@code sr-only-focusable}
-     * 
+     *
      * <pre>
      * {@code
      * html.a().BsrOnlyFocusable().HREF("#content").content("skip to main content")
@@ -1382,7 +1336,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     /**
      * Utilize the .text-hide class or mixin to help replace an element's text
      * content with a background image.
-     * 
+     *
      * <pre>
      * {@code
      * <h1 class="text-hide">Custom heading</h1>
@@ -1444,7 +1398,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     /**
      * Use a single or combination of the available visible-* and hidden-*
      * classes for toggling content across viewport breakpoints.
-     * 
+     *
      * <pre>
      * {@code
      * html.Bvisible().xs().block()...
