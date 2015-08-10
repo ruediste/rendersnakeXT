@@ -434,7 +434,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * Wrap labels and controls in .form-group for optimum spacing. <br>
-     * Do not mix form groups directly with {@link #BinputGroup()}s. Instead,
+     * Do not mix form groups directly with {@link #bInputGroup()}s. Instead,
      * nest the input group inside of the form group.
      *
      * <pre>

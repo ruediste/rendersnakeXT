@@ -256,8 +256,12 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf BinputGroup() {
-        return CLASS("input-group");
+    default TSelf bInputGroup() {
+        return tag("div", "bInputGroup").CLASS("input-group");
+    }
+
+    default TSelf _bInputGroup() {
+        return close("bInputGroup");
     }
 
     /**
