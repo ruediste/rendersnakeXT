@@ -279,7 +279,7 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      *
-     * <img src="./doc-files/BinputGroupAddon.png" width="100%"/>
+     * <img src="./doc-files/BinputGroupAddon.png" width="100%"></img>
      *
      * <p>
      * <b>Checkboxes and radio addons</b><br>
@@ -327,7 +327,7 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      *
-     * <img src="./doc-files/BinputGroupSample.png" width="100%"/>
+     * <img src="./doc-files/BinputGroupSample.png" width="100%"</img>
      */
     default TSelf BinputGroupLg() {
         return CLASS("input-group-lg");
@@ -347,7 +347,7 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      *
-     * <img src="./doc-files/BinputGroupSample.png" width="100%"/>
+     * <img src="./doc-files/BinputGroupSample.png" width="100%"></img>
      */
     default TSelf BinputGroupSm() {
         return CLASS("input-group-sm");

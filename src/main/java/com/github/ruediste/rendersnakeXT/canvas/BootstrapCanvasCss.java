@@ -723,7 +723,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * You can also add optional feedback icons with the addition of
-     * .has-feedback and the right icon with {@link #B_FORM_CONTROL_FEEDBACK()}
+     * .has-feedback and the right icon with {@link #BformControlFeedback()()}
      *
      * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
@@ -746,7 +746,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * You can also add optional feedback icons with the addition of
-     * {@link #B_HAS_FEEDBACK()} and the right icon with .form-control-feedback.
+     * {@link #BhasFeedback()()} and the right icon with .form-control-feedback.
      *
      * Feedback icons only work with textual &lt;input class="form-control"&gt;
      * elements.
@@ -769,7 +769,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * Create taller or shorter form controls that match button sizes. Use
-     * {@link #B_FORM_GROUP_LG()} for horizontal forms
+     * {@link #BformGroupLg()()} for horizontal forms
      *
      * <pre>
      * {@code
@@ -789,7 +789,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * Create taller or shorter form controls that match button sizes. Use
-     * {@link #B_FORM_GROUP_SM()} for horizontal forms
+     * {@link #BformGroupSm()()} for horizontal forms
      *
      * <pre>
      * {@code
@@ -809,7 +809,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * Quickly size labels and form controls within .form-horizontal by adding
-     * .form-group-lg or .form-group-sm. Use {@link #B_INPUT_LG()} for normal
+     * .form-group-lg or .form-group-sm. Use {@link #BinputLg()()} for normal
      * forms
      *
      * <pre>
@@ -837,7 +837,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
 
     /**
      * Quickly size labels and form controls within .form-horizontal by adding
-     * .form-group-lg or .form-group-sm. Use {@link #B_INPUT_SM()} for normal
+     * .form-group-lg or .form-group-sm. Use {@link #BinputSm()()} for normal
      * forms
      *
      * <pre>
