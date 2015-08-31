@@ -1,6 +1,7 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
         extends Html5Canvas<TSelf> {
@@ -887,83 +888,88 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
         return CLASS("help-block");
     }
 
-    public class B_ButtonArgs {
+    public class B_ButtonArgs<TSelf extends B_ButtonArgs<TSelf>> {
         private BootstrapCanvasCss<?> html;
         private boolean styleSet;
         private boolean isAnchor;
 
-        private B_ButtonArgs(BootstrapCanvasCss<?> html, boolean isAnchor) {
+        protected B_ButtonArgs(BootstrapCanvasCss<?> html, boolean isAnchor) {
             this.html = html;
             this.isAnchor = isAnchor;
         }
 
-        public B_ButtonArgs def() {
+        @SuppressWarnings("unchecked")
+        protected TSelf self() {
+            return (TSelf) this;
+        }
+
+        public TSelf def() {
             html.CLASS("btn-default");
             styleSet = true;
-            return this;
+            return self();
         }
 
-        public B_ButtonArgs primary() {
+        public TSelf primary() {
             html.CLASS("btn-primary");
             styleSet = true;
-            return this;
+            return self();
         }
 
-        public B_ButtonArgs success() {
+        public TSelf success() {
             html.CLASS("btn-success");
             styleSet = true;
-            return this;
+            return self();
         }
 
-        public B_ButtonArgs info() {
+        public TSelf info() {
             html.CLASS("btn-info");
             styleSet = true;
-            return this;
+            return self();
         }
 
-        public B_ButtonArgs warning() {
+        public TSelf warning() {
             html.CLASS("btn-warning");
             styleSet = true;
-            return this;
+            return self();
         }
 
-        public B_ButtonArgs danger() {
+        public TSelf danger() {
             html.CLASS("btn-danger");
             styleSet = true;
-            return this;
+            return self();
         }
 
         /**
          * large Button
          */
-        public B_ButtonArgs lg() {
+        public TSelf lg() {
             html.CLASS("btn-lg");
-            return this;
+            return self();
         }
 
         /**
          * small Button
          */
-        public B_ButtonArgs sm() {
+        public TSelf sm() {
             html.CLASS("btn-sm");
-            return this;
+            return self();
         }
 
         /**
          * extra small Button
          */
-        public B_ButtonArgs xs() {
+        public TSelf xs() {
             html.CLASS("btn-xs");
-            return this;
+            return self();
         }
 
         /**
          * Create block level buttons—those that span the full width of a
          * parent— by adding .btn-block.
          */
-        public B_ButtonArgs block() {
+        public TSelf block() {
             html.CLASS("btn-block");
-            return this;
+            return self();
         }
 
         /**
@@ -974,23 +980,23 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
          * aria-pressed="true" attribute) should you need to replicate the
          * active state programmatically.
          */
-        public B_ButtonArgs active() {
+        public TSelf active() {
             html.CLASS("active");
             if (!isAnchor) {
                 html.addAttribute("aria-pressed", "true");
             }
-            return this;
+            return self();
         }
 
         /**
          * Make buttons look unclickable by fading them back with opacity.
          */
-        public B_ButtonArgs disabled() {
+        public TSelf disabled() {
             if (isAnchor) {
                 html.CLASS("disabled");
             } else
                 html.DISABLED("disabled");
-            return this;
+            return self();
         }
 
     }
@@ -1006,9 +1012,9 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Create a button. For links, use {@link #bButtonA()}. Args defines various
      * button arguments. May be null.
      */
-    default TSelf bButton(Consumer<B_ButtonArgs> args) {
+    default TSelf bButton(Consumer<B_ButtonArgs<?>> args) {
         TSelf result = tag("button", "bButton").CLASS("btn").TYPE("button");
-        B_ButtonArgs tmp = new B_ButtonArgs(result, false);
+        B_ButtonArgs<?> tmp = new B_ButtonArgsImpl(result, false);
         if (args != null)
             args.accept(tmp);
         if (!tmp.styleSet) {
@@ -1032,12 +1038,19 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     /**
      * Create a link (&lt;a&gt;) styled as button
      */
-    default TSelf bButtonA(Consumer<B_ButtonArgs> args) {
+    default TSelf bButtonA(Consumer<B_ButtonArgs<?>> args) {
+        return bButtonA(() -> {
+            B_ButtonArgs<?> tmp = new B_ButtonArgsImpl(self(), true);
+            if (args != null)
+                args.accept(tmp);
+            return tmp;
+        });
+    }
+
+    default TSelf bButtonA(Supplier<B_ButtonArgs<?>> args) {
         TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role",
                 "button");
-        B_ButtonArgs tmp = new B_ButtonArgs(result, true);
-        if (args != null)
-            args.accept(tmp);
+        B_ButtonArgs<?> tmp = args.get();
         if (!tmp.styleSet) {
             result.CLASS("btn-default");
         }
