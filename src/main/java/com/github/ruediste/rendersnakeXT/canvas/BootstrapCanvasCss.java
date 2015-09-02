@@ -888,7 +888,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
         return CLASS("help-block");
     }
 
-    public class B_ButtonArgs<TSelf extends B_ButtonArgs<TSelf>> {
+    public static class B_ButtonArgs<TSelf extends B_ButtonArgs<TSelf>> {
         private BootstrapCanvasCss<?> html;
         private boolean styleSet;
         private boolean isAnchor;
@@ -1005,7 +1005,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Create a button. For links, use {@link #bButtonA()}
      */
     default TSelf bButton() {
-        return bButton(null);
+        return bButton((Supplier<B_ButtonArgs<?>>) null);
     }
 
     /**
@@ -1013,11 +1013,18 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * button arguments. May be null.
      */
     default TSelf bButton(Consumer<B_ButtonArgs<?>> args) {
+        return bButton(() -> {
+            B_ButtonArgs<?> result = new B_ButtonArgsImpl(this, false);
+            if (args != null)
+                args.accept(result);
+            return result;
+        });
+    }
+
+    default TSelf bButton(Supplier<B_ButtonArgs<?>> args) {
         TSelf result = tag("button", "bButton").CLASS("btn").TYPE("button");
-        B_ButtonArgs<?> tmp = new B_ButtonArgsImpl(result, false);
-        if (args != null)
-            args.accept(tmp);
-        if (!tmp.styleSet) {
+        B_ButtonArgs<?> tmp = args.get();
+        if (tmp == null || !tmp.styleSet) {
             result.CLASS("btn-default");
         }
         return result;
