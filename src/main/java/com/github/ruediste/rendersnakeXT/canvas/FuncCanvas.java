@@ -1,10 +1,11 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>> extends
-        HtmlCanvas<TSelf> {
+public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>>
+        extends HtmlCanvas<TSelf> {
 
     /**
      * Supply the value of the optional to the consumer if the value is present
@@ -57,9 +58,23 @@ public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>> extends
     /**
      * supply each value of an iterable to a renderer
      */
-    default <T> TSelf fForEach(Iterable<T> items, Consumer<? super T> renderer) {
+    default <T> TSelf fForEach(Iterable<T> items,
+            Consumer<? super T> renderer) {
         for (T item : items) {
             renderer.accept(item);
+        }
+        return self();
+    }
+
+    /**
+     * supply each value of an iterable to a renderer
+     */
+    default <T> TSelf fForEach(Iterable<T> items,
+            BiConsumer<Integer, ? super T> renderer) {
+        int idx = 0;
+        for (T item : items) {
+            renderer.accept(idx, item);
+            idx++;
         }
         return self();
     }
