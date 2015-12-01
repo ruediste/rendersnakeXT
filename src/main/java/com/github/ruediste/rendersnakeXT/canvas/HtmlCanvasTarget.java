@@ -40,8 +40,6 @@ public class HtmlCanvasTarget {
 
     /**
      * Create a new HtmlCanvas that writes its output on Writer.
-     * 
-     * @param output
      */
     public HtmlCanvasTarget(Writer output) {
         this.out = output;
@@ -127,7 +125,8 @@ public class HtmlCanvasTarget {
     public void close() {
         if (openTagStack.isEmpty())
             throw new RuntimeException("Empty Stack");
-        writeUnescaped(openTagStack.remove(openTagStack.size() - 1).closeFragment);
+        writeUnescaped(
+                openTagStack.remove(openTagStack.size() - 1).closeFragment);
         writeUnescaped(" ");
     }
 
