@@ -3,8 +3,7 @@ package com.github.ruediste.rendersnakeXT.canvas;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
-        extends Html5Canvas<TSelf> {
+public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extends Html5Canvas<TSelf> {
 
     default TSelf bContainer() {
         return tag("div", "bContainer").CLASS("container");
@@ -888,14 +887,25 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
         return CLASS("help-block");
     }
 
+    public static enum B_ButtonStyle {
+        DEFAULT("btn-default"), PRIMARY("btn-primary"), SUCCESS("btn-success"), INFO("btn-info"), WARNING(
+                "btn-warning"), DANGER("btn-danger"), LINK("btn-link");
+        public final String cls;
+
+        B_ButtonStyle(String cls) {
+            this.cls = cls;
+
+        }
+    }
+
     public static class B_ButtonArgs<TSelf extends B_ButtonArgs<TSelf>> {
         private BootstrapCanvasCss<?> html;
-        private boolean styleSet;
-        private boolean isAnchor;
+        private boolean isLink;
+        private B_ButtonStyle style = B_ButtonStyle.DEFAULT;
 
-        protected B_ButtonArgs(BootstrapCanvasCss<?> html, boolean isAnchor) {
+        protected B_ButtonArgs(BootstrapCanvasCss<?> html, boolean isLink) {
             this.html = html;
-            this.isAnchor = isAnchor;
+            this.isLink = isLink;
         }
 
         @SuppressWarnings("unchecked")
@@ -903,40 +913,37 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
             return (TSelf) this;
         }
 
-        public TSelf def() {
-            html.CLASS("btn-default");
-            styleSet = true;
+        public TSelf style(B_ButtonStyle style) {
+            this.style = style;
             return self();
+        }
+
+        public TSelf def() {
+            return style(B_ButtonStyle.DEFAULT);
         }
 
         public TSelf primary() {
-            html.CLASS("btn-primary");
-            styleSet = true;
-            return self();
+            return style(B_ButtonStyle.PRIMARY);
         }
 
         public TSelf success() {
-            html.CLASS("btn-success");
-            styleSet = true;
-            return self();
+            return style(B_ButtonStyle.SUCCESS);
         }
 
         public TSelf info() {
-            html.CLASS("btn-info");
-            styleSet = true;
-            return self();
+            return style(B_ButtonStyle.INFO);
         }
 
         public TSelf warning() {
-            html.CLASS("btn-warning");
-            styleSet = true;
-            return self();
+            return style(B_ButtonStyle.WARNING);
         }
 
         public TSelf danger() {
-            html.CLASS("btn-danger");
-            styleSet = true;
-            return self();
+            return style(B_ButtonStyle.DANGER);
+        }
+
+        public TSelf link() {
+            return style(B_ButtonStyle.LINK);
         }
 
         /**
@@ -982,7 +989,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
          */
         public TSelf active() {
             html.CLASS("active");
-            if (!isAnchor) {
+            if (!isLink) {
                 html.addAttribute("aria-pressed", "true");
             }
             return self();
@@ -992,7 +999,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
          * Make buttons look unclickable by fading them back with opacity.
          */
         public TSelf disabled() {
-            if (isAnchor) {
+            if (isLink) {
                 html.CLASS("disabled");
             } else
                 html.DISABLED("disabled");
@@ -1024,9 +1031,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     default TSelf bButton(Supplier<B_ButtonArgs<?>> args) {
         TSelf result = tag("button", "bButton").CLASS("btn").TYPE("button");
         B_ButtonArgs<?> tmp = args.get();
-        if (!tmp.styleSet) {
-            result.CLASS("btn-default");
-        }
+        result.CLASS(tmp.style.cls);
         return result;
     }
 
@@ -1055,12 +1060,9 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
     }
 
     default TSelf bButtonA(Supplier<B_ButtonArgs<?>> args) {
-        TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role",
-                "button");
+        TSelf result = tag("a", "bButtonA").CLASS("btn").addAttribute("role", "button");
         B_ButtonArgs<?> tmp = args.get();
-        if (!tmp.styleSet) {
-            result.CLASS("btn-default");
-        }
+        result.CLASS(tmp.style.cls);
         return result;
     }
 
@@ -1230,10 +1232,8 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>>
      * Use the generic close icon for dismissing content like modals and alerts.
      */
     default TSelf bCloseIcon() {
-        return button().TYPE("button").CLASS("close")
-                .addAttribute("aria-label", "Close").span()
-                .addAttribute("aria-hidden", "true").writeUnescaped("&times;")
-                ._span()._button();
+        return button().TYPE("button").CLASS("close").addAttribute("aria-label", "Close").span()
+                .addAttribute("aria-hidden", "true").writeUnescaped("&times;")._span()._button();
     }
 
     /**
