@@ -362,16 +362,12 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
         /**
          * Applies the hover color to a particular row or cell
          */
-        ACTIVE,
-        /**
-         * Indicates a successful or positive action
-         */
-        SUCCESS,
-        /** Indicates a neutral informative change or action */
-        INFO,
-        /** Indicates a warning that might need attention */
-        WARNING,
-        /** Indicates a dangerous or potentially negative action */
+        ACTIVE, /**
+                 * Indicates a successful or positive action
+                 */
+        SUCCESS, /** Indicates a neutral informative change or action */
+        INFO, /** Indicates a warning that might need attention */
+        WARNING, /** Indicates a dangerous or potentially negative action */
         DANGER,
     }
 
@@ -1002,7 +998,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
             if (isLink) {
                 html.CLASS("disabled");
             } else
-                html.DISABLED("disabled");
+                html.DISABLED();
             return self();
         }
 

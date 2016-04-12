@@ -2,13 +2,12 @@ package com.github.ruediste.rendersnakeXT.canvas;
 
 import java.util.function.Consumer;
 
-public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
-        extends Html5Canvas<TSelf> {
+public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>> extends Html5Canvas<TSelf> {
 
     public class B_NavbarOptions {
         enum B_NavbarAlignment {
-            DEFAULT("navbar-default"), FIXED_TOP("navbar-fixed-top"), FIXED_BOTTOM(
-                    "navbar-fixed-bottom"), STATIC_TOP("navbar-static-top)");
+            DEFAULT("navbar-default"), FIXED_TOP("navbar-fixed-top"), FIXED_BOTTOM("navbar-fixed-bottom"), STATIC_TOP(
+                    "navbar-static-top)");
 
             final String css;
 
@@ -96,8 +95,7 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
     /**
      * Render a bootstrap navigation. No close tag required.
      */
-    default TSelf bNavbar(String id, Consumer<B_NavbarOptions> options,
-            Runnable brand, Runnable content) {
+    default TSelf bNavbar(String id, Consumer<B_NavbarOptions> options, Runnable brand, Runnable content) {
         B_NavbarOptions opts = new B_NavbarOptions();
         options.accept(opts);
 
@@ -313,8 +311,12 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
      * }
      * </pre>
      */
-    default TSelf BinputGroupAddon() {
-        return CLASS("input-group-addon");
+    default TSelf bInputGroupAddon() {
+        return tag("span", "bInputGroupAddon").CLASS("input-group-addon");
+    }
+
+    default TSelf _bInputGroupAddon() {
+        return close("bInputGroupAddon");
     }
 
     /**

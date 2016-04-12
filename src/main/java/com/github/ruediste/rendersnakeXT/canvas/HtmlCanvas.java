@@ -17,10 +17,8 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * {@link #addAttribute(String, String)} will commit the attributes, causing
      * the postAttributesFragment to be written.
      */
-    default TSelf startTag(String display, String postAttributesFragment,
-            String closeFragment) {
-        internal_target().startTag(display, postAttributesFragment,
-                closeFragment);
+    default TSelf startTag(String display, String postAttributesFragment, String closeFragment) {
+        internal_target().startTag(display, postAttributesFragment, closeFragment);
         return self();
     }
 

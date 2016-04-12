@@ -818,8 +818,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("dropzone", DROPZONE);
     }
 /** All HTML elements may have the hidden content attribute set. The hidden attribute is a boolean attribute. When specified on an element, it indicates that the element is not yet, or is no longer, directly relevant to the page's current state, or that it is being used to declare content to be reused by other parts of the page as opposed to being directly accessed by the user. User agents should not render elements that have the hidden attribute specified. This requirement may be implemented indirectly through the style layer. For example, an HTML+CSS user agent could implement these requirements using the rules suggested in the Rendering section.*/
-    default TSelf HIDDEN(String HIDDEN) {
-        return addAttribute("hidden", HIDDEN);
+    default TSelf HIDDEN() {
+        return addAttribute("hidden", "");
     }
 /** The id attribute specifies its element's unique identifier (ID). [DOM]*/
     default TSelf ID(String ID) {
@@ -838,8 +838,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("itemref", ITEMREF);
     }
 /** */
-    default TSelf ITEMSCOPE(String ITEMSCOPE) {
-        return addAttribute("itemscope", ITEMSCOPE);
+    default TSelf ITEMSCOPE() {
+        return addAttribute("itemscope", "");
     }
 /** */
     default TSelf ITEMTYPE(String ITEMTYPE) {
@@ -1170,8 +1170,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("charset", CHARSET);
     }
 /**  Whether the styles apply to the entire document or just the parent subtree*/
-    default TSelf SCOPED(String SCOPED) {
-        return addAttribute("scoped", SCOPED);
+    default TSelf SCOPED() {
+        return addAttribute("scoped", "");
     }
 /** */
     default TSelf ONAFTERPRINT(String ONAFTERPRINT) {
@@ -1230,8 +1230,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("cite", CITE);
     }
 /**  Number the list backwards*/
-    default TSelf REVERSED(String REVERSED) {
-        return addAttribute("reversed", REVERSED);
+    default TSelf REVERSED() {
+        return addAttribute("reversed", "");
     }
 /**  Ordinal value of the first item*/
     default TSelf START(String START) {
@@ -1270,8 +1270,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("usemap", USEMAP);
     }
 /**  Whether the image is a server-side image map*/
-    default TSelf ISMAP(String ISMAP) {
-        return addAttribute("ismap", ISMAP);
+    default TSelf ISMAP() {
+        return addAttribute("ismap", "");
     }
 /**  Horizontal dimension*/
     default TSelf WIDTH(String WIDTH) {
@@ -1290,20 +1290,20 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("sandbox", SANDBOX);
     }
 /**  Whether to apply the document's styles to the nested content*/
-    default TSelf SEAMLESS(String SEAMLESS) {
-        return addAttribute("seamless", SEAMLESS);
+    default TSelf SEAMLESS() {
+        return addAttribute("seamless", "");
     }
 /**  Whether to allow the iframe's contents to use requestFullscreen()*/
-    default TSelf ALLOWFULLSCREEN(String ALLOWFULLSCREEN) {
-        return addAttribute("allowfullscreen", ALLOWFULLSCREEN);
+    default TSelf ALLOWFULLSCREEN() {
+        return addAttribute("allowfullscreen", "");
     }
 /**  Address of the resource*/
     default TSelf DATA(String DATA) {
         return addAttribute("data", DATA);
     }
 /**  Whether the type attribute and the Content-Type value need to match for the resource to be used*/
-    default TSelf TYPEMUSTMATCH(String TYPEMUSTMATCH) {
-        return addAttribute("typemustmatch", TYPEMUSTMATCH);
+    default TSelf TYPEMUSTMATCH() {
+        return addAttribute("typemustmatch", "");
     }
 /**  Associates the control with a form element*/
     default TSelf FORM(String FORM) {
@@ -1318,24 +1318,24 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("preload", PRELOAD);
     }
 /**  Hint that the media resource can be started automatically when the page is loaded*/
-    default TSelf AUTOPLAY(String AUTOPLAY) {
-        return addAttribute("autoplay", AUTOPLAY);
+    default TSelf AUTOPLAY() {
+        return addAttribute("autoplay", "");
     }
 /**  Groups media elements together with an implicit MediaController*/
     default TSelf MEDIAGROUP(String MEDIAGROUP) {
         return addAttribute("mediagroup", MEDIAGROUP);
     }
 /**  Whether to loop the media resource*/
-    default TSelf LOOP(String LOOP) {
-        return addAttribute("loop", LOOP);
+    default TSelf LOOP() {
+        return addAttribute("loop", "");
     }
 /**  Whether to mute the media resource by default*/
-    default TSelf MUTED(String MUTED) {
-        return addAttribute("muted", MUTED);
+    default TSelf MUTED() {
+        return addAttribute("muted", "");
     }
 /**  Show user agent controls*/
-    default TSelf CONTROLS(String CONTROLS) {
-        return addAttribute("controls", CONTROLS);
+    default TSelf CONTROLS() {
+        return addAttribute("controls", "");
     }
 /**  The type of text track*/
     default TSelf KIND(String KIND) {
@@ -1350,8 +1350,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("label", LABEL);
     }
 /**  Enable the track if no other text track is more suitable*/
-    default TSelf DEFAULT(String DEFAULT) {
-        return addAttribute("default", DEFAULT);
+    default TSelf DEFAULT() {
+        return addAttribute("default", "");
     }
 /**  Coordinates for the shape to be created in an image map*/
     default TSelf COORDS(String COORDS) {
@@ -1362,8 +1362,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("shape", SHAPE);
     }
 /**  Enables a sorting interface for the table*/
-    default TSelf SORTABLE(String SORTABLE) {
-        return addAttribute("sortable", SORTABLE);
+    default TSelf SORTABLE() {
+        return addAttribute("sortable", "");
     }
 /**  Number of columns spanned by the element*/
     default TSelf SPAN(String SPAN) {
@@ -1414,8 +1414,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("method", METHOD);
     }
 /**  Bypass form control validation for form submission*/
-    default TSelf NOVALIDATE(String NOVALIDATE) {
-        return addAttribute("novalidate", NOVALIDATE);
+    default TSelf NOVALIDATE() {
+        return addAttribute("novalidate", "");
     }
 /**  Associate the label with form control*/
     default TSelf FOR(String FOR) {
@@ -1426,20 +1426,20 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("accept", ACCEPT);
     }
 /**  Automatically focus the form control when the page is loaded*/
-    default TSelf AUTOFOCUS(String AUTOFOCUS) {
-        return addAttribute("autofocus", AUTOFOCUS);
+    default TSelf AUTOFOCUS() {
+        return addAttribute("autofocus", "");
     }
 /**  Whether the command or control is checked*/
-    default TSelf CHECKED(String CHECKED) {
-        return addAttribute("checked", CHECKED);
+    default TSelf CHECKED() {
+        return addAttribute("checked", "");
     }
 /**  Name of form field to use for sending the element's directionality in form submission*/
     default TSelf DIRNAME(String DIRNAME) {
         return addAttribute("dirname", DIRNAME);
     }
 /**  Whether the form control is disabled*/
-    default TSelf DISABLED(String DISABLED) {
-        return addAttribute("disabled", DISABLED);
+    default TSelf DISABLED() {
+        return addAttribute("disabled", "");
     }
 /**  URL to use for form submission*/
     default TSelf FORMACTION(String FORMACTION) {
@@ -1454,8 +1454,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("formmethod", FORMMETHOD);
     }
 /**  Bypass form control validation for form submission*/
-    default TSelf FORMNOVALIDATE(String FORMNOVALIDATE) {
-        return addAttribute("formnovalidate", FORMNOVALIDATE);
+    default TSelf FORMNOVALIDATE() {
+        return addAttribute("formnovalidate", "");
     }
 /**  Browsing context for form submission*/
     default TSelf FORMTARGET(String FORMTARGET) {
@@ -1486,8 +1486,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("minlength", MINLENGTH);
     }
 /**  Whether to allow multiple values*/
-    default TSelf MULTIPLE(String MULTIPLE) {
-        return addAttribute("multiple", MULTIPLE);
+    default TSelf MULTIPLE() {
+        return addAttribute("multiple", "");
     }
 /**  Pattern to be matched by the form control's value*/
     default TSelf PATTERN(String PATTERN) {
@@ -1498,12 +1498,12 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("placeholder", PLACEHOLDER);
     }
 /**  Whether to allow the value to be edited by the user*/
-    default TSelf READONLY(String READONLY) {
-        return addAttribute("readonly", READONLY);
+    default TSelf READONLY() {
+        return addAttribute("readonly", "");
     }
 /**  Whether the control is required for form submission*/
-    default TSelf REQUIRED(String REQUIRED) {
-        return addAttribute("required", REQUIRED);
+    default TSelf REQUIRED() {
+        return addAttribute("required", "");
     }
 /**  Size of the control*/
     default TSelf SIZE(String SIZE) {
@@ -1518,8 +1518,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("menu", MENU);
     }
 /**  Whether the option is selected by default*/
-    default TSelf SELECTED(String SELECTED) {
-        return addAttribute("selected", SELECTED);
+    default TSelf SELECTED() {
+        return addAttribute("selected", "");
     }
 /**  Maximum number of characters per line*/
     default TSelf COLS(String COLS) {
@@ -1554,8 +1554,8 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("optimum", OPTIMUM);
     }
 /**  Whether the details are visible*/
-    default TSelf OPEN(String OPEN) {
-        return addAttribute("open", OPEN);
+    default TSelf OPEN() {
+        return addAttribute("open", "");
     }
 /**  Icon for the command*/
     default TSelf ICON(String ICON) {
@@ -1570,12 +1570,12 @@ public interface Html5Canvas<TSelf extends Html5Canvas<TSelf>>
         return addAttribute("command", COMMAND);
     }
 /**  Execute script when available, without blocking*/
-    default TSelf ASYNC(String ASYNC) {
-        return addAttribute("async", ASYNC);
+    default TSelf ASYNC() {
+        return addAttribute("async", "");
     }
 /**  Defer script execution*/
-    default TSelf DEFER(String DEFER) {
-        return addAttribute("defer", DEFER);
+    default TSelf DEFER() {
+        return addAttribute("defer", "");
     }
 /** No End Tag Allowed! <br> Input element with type hidden<br> Data Type: An arbitrary string<br> Control Type: n/a */
     default TSelf input_hidden() {
