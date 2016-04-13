@@ -236,7 +236,7 @@ public interface BootstrapCanvasComponents<TSelf extends BootstrapCanvas<TSelf>>
     }
 
     /**
-     * Group inputs and {@link #BinputGroupAddon()} s together
+     * Group inputs and {@link #bInputGroupAddon()} s together
      *
      * <pre>
      * {@code
