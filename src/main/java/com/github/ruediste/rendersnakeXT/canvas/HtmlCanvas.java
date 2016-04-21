@@ -57,23 +57,6 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
         internal_target().checkAttributesUncommited();
     }
 
-    default void internal_writeUnescaped(String str) {
-        internal_target().internal_writeUnescaped(out -> out.write(str));
-    }
-
-    /**
-     * Write some text without escaping it. commits the current attributes
-     * 
-     * @param text
-     *            String , HTML or plain text
-     * @return HTMLCanvas , the receiver
-     */
-    default TSelf writeUnescaped(CharactersWriteable text) {
-        commitAttributes();
-        internal_target().internal_writeUnescaped(text);
-        return self();
-    }
-
     /**
      * Write some text without escaping it
      * 
@@ -82,14 +65,15 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @return HTMLCanvas , the receiver
      */
     default TSelf writeUnescaped(String text) {
-        return writeUnescaped(out -> out.write(text));
+        internal_target().writeUnescaped(text);
+        return self();
     }
 
     /**
      * Write directly to this canvas, without commiting attributes.
      */
     default TSelf writeUnescapedWithoutAttributeCommiting(String text) {
-        internal_writeUnescaped(text);
+        internal_target().writeUnescapedWithoutAttributeCommitting(text);
         return self();
     }
 
@@ -194,16 +178,22 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      */
     default TSelf addAttribute(String key, int value) {
         checkAttributesUncommited();
-        internal_writeUnescaped(" " + key + "=\"" + value + "\"");
+        writeUnescapedWithoutAttributeCommiting(" " + key + "=\"" + value + "\"");
         return self();
     }
 
+    /**
+     * Render the given {@link Renderable}
+     */
     default TSelf render(Renderable<? super TSelf> r) {
         TSelf self = self();
         r.renderOn(self);
         return self;
     }
 
+    /**
+     * execute the given {@link Runnable}
+     */
     default TSelf render(Runnable r) {
         r.run();
         return self();

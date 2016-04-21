@@ -1,11 +1,13 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends
-        HtmlCanvas<TSelf> {
+/**
+ * Additional methods which are not generated automatically
+ */
+public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends HtmlCanvas<TSelf> {
     /**
      * Add a class attribute. Multiple calls to this method are allowed. The
      * supplied classes will be combined to one single attribute.
-     * */
+     */
     default TSelf CLASS(String class_) {
         internal_target().CLASS(class_);
         return self();

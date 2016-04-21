@@ -45,7 +45,7 @@ public class HtmlCanvasTarget {
         this.out = output;
     }
 
-    public void internal_writeUnescaped(String str) {
+    public void writeUnescapedWithoutAttributeCommitting(String str) {
         try {
             out.write(str);
         } catch (IOException e) {
@@ -53,26 +53,9 @@ public class HtmlCanvasTarget {
         }
     }
 
-    /**
-     * Internal method directly writing to the output buffer, without any bells
-     * and whistles.
-     */
-    public void internal_writeUnescaped(CharactersWriteable writeable) {
-        try {
-            writeable.writeCharsOn(out);
-        } catch (IOException e) {
-            throw new RuntimeException("Error while writing to output", e);
-        }
-    }
-
-    public void writeUnescaped(CharactersWriteable writeable) {
-        commitAttributes();
-        internal_writeUnescaped(writeable);
-    }
-
     public void writeUnescaped(String str) {
         commitAttributes();
-        internal_writeUnescaped(str);
+        writeUnescapedWithoutAttributeCommitting(str);
     }
 
     public void startTagWithoutEndTag(String postAttributesFragment) {
@@ -80,8 +63,7 @@ public class HtmlCanvasTarget {
         this.postAttributesFragment = postAttributesFragment + " ";
     }
 
-    public void startTag(String display, String postAttributesFragment,
-            String closeFragment) {
+    public void startTag(String display, String postAttributesFragment, String closeFragment) {
         commitAttributes();
         this.postAttributesFragment = postAttributesFragment;
         openTagStack.add(new StackEntry(display, closeFragment));
@@ -89,11 +71,11 @@ public class HtmlCanvasTarget {
 
     public void addAttribute(String key, String value) {
         checkAttributesUncommited();
-        internal_writeUnescaped(" ");
-        internal_writeUnescaped(key);
-        internal_writeUnescaped("=\"");
-        internal_writeUnescaped(Encode.forHtmlAttribute(value));
-        internal_writeUnescaped("\"");
+        writeUnescapedWithoutAttributeCommitting(" ");
+        writeUnescapedWithoutAttributeCommitting(key);
+        writeUnescapedWithoutAttributeCommitting("=\"");
+        writeUnescapedWithoutAttributeCommitting(Encode.forHtmlAttribute(value));
+        writeUnescapedWithoutAttributeCommitting("\"");
     }
 
     public void commitAttributes() {
@@ -102,7 +84,7 @@ public class HtmlCanvasTarget {
                 addAttribute("class", classBuilder.toString());
                 classBuilder.setLength(0);
             }
-            internal_writeUnescaped(out -> out.write(postAttributesFragment));
+            writeUnescapedWithoutAttributeCommitting(postAttributesFragment);
             postAttributesFragment = null;
         }
     }
@@ -118,15 +100,13 @@ public class HtmlCanvasTarget {
 
     public void checkAttributesUncommited() {
         if (postAttributesFragment == null)
-            throw new RuntimeException(
-                    "attributes of the last tag are already commited");
+            throw new RuntimeException("attributes of the last tag are already commited");
     }
 
     public void close() {
         if (openTagStack.isEmpty())
             throw new RuntimeException("Empty Stack");
-        writeUnescaped(
-                openTagStack.remove(openTagStack.size() - 1).closeFragment);
+        writeUnescaped(openTagStack.remove(openTagStack.size() - 1).closeFragment);
         writeUnescaped(" ");
     }
 
@@ -135,8 +115,8 @@ public class HtmlCanvasTarget {
             throw new RuntimeException("Open Tag stack is empty");
         StackEntry popped = openTagStack.remove(openTagStack.size() - 1);
         if (!popped.display.equals(expectedDisplay))
-            throw new RuntimeException("Expected to close \"" + expectedDisplay
-                    + "\" but \"" + popped.display + "\" was started");
+            throw new RuntimeException(
+                    "Expected to close \"" + expectedDisplay + "\" but \"" + popped.display + "\" was started");
         writeUnescaped(popped.closeFragment);
         writeUnescaped(" ");
     }
