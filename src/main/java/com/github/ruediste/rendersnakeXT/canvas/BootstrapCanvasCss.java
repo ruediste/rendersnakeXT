@@ -339,19 +339,13 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
         return self();
     }
 
-    /**
-     * Create a responsive table. The table is placed in a resposive wrapper.
-     * Attributes will be put onto the table.
-     */
-    default TSelf bTableResposive(Consumer<B_TableBuilder> opts) {
-        writeUnescaped("<div class=\"table-responsive\"><table");
-        startTag("bTableResposive", ">", "</table></div>");
-        opts.accept(new B_TableBuilder(this));
-        return CLASS("bTableResposive");
+    default TSelf BtableResponsive() {
+        return CLASS("table-responsive");
     }
 
-    default TSelf _bTableResposive() {
-        return close("bTableResposive");
+    default TSelf BtableResponiveOpts(Consumer<B_TableBuilder> opts) {
+        opts.accept(new B_TableBuilder(this));
+        return self();
     }
 
     default TSelf _bTable() {

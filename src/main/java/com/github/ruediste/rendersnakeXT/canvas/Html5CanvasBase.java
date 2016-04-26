@@ -89,4 +89,5 @@ public interface Html5CanvasBase<TSelf extends Html5Canvas<TSelf>> extends HtmlC
     default TSelf ARIA_HIDDEN() {
         return addAttribute("aria-hidden", "true");
     }
+
 }

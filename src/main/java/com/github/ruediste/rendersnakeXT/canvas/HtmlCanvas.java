@@ -1,5 +1,7 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
+import java.util.function.Supplier;
+
 import org.owasp.encoder.Encode;
 
 public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
@@ -113,7 +115,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @return HTMLCanvas , the receiver @
      */
     default TSelf _cdata() {
-        return close("/*]]>*/");
+        return close("cdata");
     }
 
     /**
@@ -137,10 +139,9 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * given display name
      */
     default TSelf tag(String tagName, String displayName) {
-        if (tagName == null)
-            throw new RuntimeException("tagName is null");
-        writeUnescaped("<" + tagName);
-        return startTag(displayName, ">", "</" + tagName + ">");
+        internal_target().tag(displayName, tagName);
+        return self();
+
     }
 
     /**
@@ -151,6 +152,11 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
             throw new RuntimeException("tagName is null");
         writeUnescaped("<" + tagName);
         internal_target().startTagWithoutEndTag(">");
+        return self();
+    }
+
+    default TSelf addAttribute(String key, Supplier<String> value) {
+        internal_target().addAttribute(key, value);
         return self();
     }
 
