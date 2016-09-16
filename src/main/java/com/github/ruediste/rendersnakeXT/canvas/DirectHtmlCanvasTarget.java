@@ -2,7 +2,6 @@ package com.github.ruediste.rendersnakeXT.canvas;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.function.Supplier;
 
 /**
  * Target for a {@link HtmlCanvasBase}. This class can be instantiated and then
@@ -29,11 +28,6 @@ public class DirectHtmlCanvasTarget extends HtmlCanvasTargetBase {
         } catch (IOException e) {
             throw new RuntimeException("Error while writing to output", e);
         }
-    }
-
-    @Override
-    public void writeUnescapedWithoutAttributeCommitting(Supplier<String> str) {
-        writeUnescapedWithoutAttributeCommitting(str.get());
     }
 
     @Override

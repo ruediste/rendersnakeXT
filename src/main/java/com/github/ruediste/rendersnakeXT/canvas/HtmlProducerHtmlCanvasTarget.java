@@ -1,8 +1,7 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;;
+import java.util.List;;
 
 /**
  * Target for a {@link HtmlCanvasBase}. This class can be instantiated and then
@@ -20,12 +19,6 @@ public class HtmlProducerHtmlCanvasTarget extends HtmlCanvasTargetBase {
     }
 
     @Override
-    public void writeUnescapedWithoutAttributeCommitting(Supplier<String> str) {
-        flush();
-        producers.add(consumer -> consumer.accept(str.get()));
-    }
-
-    @Override
     public void flush() {
         if (constHtml.length() > 0) {
             String tmp = constHtml.toString();
@@ -34,7 +27,9 @@ public class HtmlProducerHtmlCanvasTarget extends HtmlCanvasTargetBase {
         }
     }
 
-    public void addProducer(HtmlProducer producer) {
+    public void addProducer(HtmlProducer producer, boolean commitAttributes) {
+        if (commitAttributes)
+            commitAttributes();
         flush();
         producers.add(producer);
     }

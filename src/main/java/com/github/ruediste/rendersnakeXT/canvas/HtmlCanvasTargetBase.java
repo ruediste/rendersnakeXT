@@ -1,9 +1,9 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-import java.util.ArrayList;
-import java.util.function.Supplier;
+import static java.util.stream.Collectors.joining;
 
-import org.owasp.encoder.Encode;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.common.base.Strings;
 
@@ -12,6 +12,8 @@ import com.google.common.base.Strings;
  * wrapped by any {@link HtmlCanvas}.
  */
 public abstract class HtmlCanvasTargetBase implements HtmlCanvasTarget {
+
+    public boolean captureStartStackTraces;
 
     /**
      * Entry in the current html tag stack
@@ -27,9 +29,12 @@ public abstract class HtmlCanvasTargetBase implements HtmlCanvasTarget {
          */
         String closeFragment;
 
-        public StackEntry(String display, String closeFragment) {
+        private StackTraceElement[] startTrace;
+
+        public StackEntry(String display, String closeFragment, StackTraceElement[] startTrace) {
             this.display = display;
             this.closeFragment = closeFragment;
+            this.startTrace = startTrace;
         }
 
     }
@@ -42,11 +47,11 @@ public abstract class HtmlCanvasTargetBase implements HtmlCanvasTarget {
     /**
      * Builds the contents of the current "class" attribute.
      */
-    private StringBuilder classBuilder = new StringBuilder();
+    protected StringBuilder classBuilder = new StringBuilder();
 
     /**
      * The html fragment to be emitted when commiting the attributes of the
-     * current tag
+     * current tag, null if there is no current tag
      */
     protected String postAttributesFragment;
 
@@ -57,37 +62,18 @@ public abstract class HtmlCanvasTargetBase implements HtmlCanvasTarget {
     }
 
     @Override
-    public void startTagWithoutEndTag(String postAttributesFragment) {
+    public void tagStartedWithoutEndTag(String postAttributesFragment) {
         commitAttributes();
         this.postAttributesFragment = postAttributesFragment + " ";
     }
 
     @Override
-    public void startTag(String display, String postAttributesFragment, String closeFragment) {
+    public void tagStarted(String display, String postAttributesFragment, String closeFragment) {
         commitAttributes();
         this.postAttributesFragment = postAttributesFragment;
-        openTagStack.add(new StackEntry(display, closeFragment));
-    }
 
-    @Override
-    public void addAttribute(String key, String value) {
-        checkAttributesUncommited();
-        writeUnescapedWithoutAttributeCommitting(" ");
-        writeUnescapedWithoutAttributeCommitting(key);
-        writeUnescapedWithoutAttributeCommitting("=\"");
-        writeUnescapedWithoutAttributeCommitting(Encode.forHtmlAttribute(value));
-        writeUnescapedWithoutAttributeCommitting("\"");
-    }
-
-    @Override
-    public void addAttribute(String key, Supplier<String> value) {
-
-        checkAttributesUncommited();
-        writeUnescapedWithoutAttributeCommitting(" ");
-        writeUnescapedWithoutAttributeCommitting(key);
-        writeUnescapedWithoutAttributeCommitting("=\"");
-        writeUnescapedWithoutAttributeCommitting(() -> Encode.forHtmlAttribute(value.get()));
-        writeUnescapedWithoutAttributeCommitting("\"");
+        openTagStack.add(new StackEntry(display, closeFragment,
+                captureStartStackTraces ? Thread.currentThread().getStackTrace() : null));
     }
 
     @Override
@@ -131,11 +117,47 @@ public abstract class HtmlCanvasTargetBase implements HtmlCanvasTarget {
         if (openTagStack.isEmpty())
             throw new RuntimeException("Open Tag stack is empty");
         StackEntry popped = openTagStack.remove(openTagStack.size() - 1);
-        if (!popped.display.equals(expectedDisplay))
-            throw new RuntimeException(
-                    "Expected to close \"" + expectedDisplay + "\" but \"" + popped.display + "\" was started");
+        if (!popped.display.equals(expectedDisplay)) {
+            StackTraceElement[] trace = popped.startTrace;
+            if (trace != null) {
+                RuntimeException cause = new RuntimeException("Attempt to close " + expectedDisplay);
+                cause.setStackTrace(filterTrace(cause.getStackTrace()));
+
+                RuntimeException ex = new RuntimeException("Expected to close \"" + expectedDisplay + "\" but \""
+                        + popped.display + "\" was started here:", cause);
+                int idx = firstOtherPackageElement(trace);
+                ex.setStackTrace(trace);
+                // ex.setStackTrace(Arrays.copyOfRange(trace, idx, idx));
+                throw ex;
+            } else
+                throw new RuntimeException(
+                        "Expected to close \"" + expectedDisplay + "\" but \"" + popped.display + "\" was started");
+        }
+        ;
         writeUnescaped(popped.closeFragment);
         writeUnescaped(" ");
     }
 
+    private StackTraceElement[] filterTrace(StackTraceElement[] causeTrace) {
+        StackTraceElement[] copyOfRange = Arrays.copyOfRange(causeTrace, firstOtherPackageElement(causeTrace),
+                causeTrace.length);
+        return copyOfRange;
+    }
+
+    private int firstOtherPackageElement(StackTraceElement[] causeTrace) {
+        String basePackage = getClass().getName().substring(0, getClass().getName().lastIndexOf("."));
+        int i;
+        for (i = 0; i < causeTrace.length; i++) {
+            String className = causeTrace[i].getClassName();
+            if (className != null && !className.startsWith(basePackage))
+                break;
+        }
+        return i;
+    }
+
+    public void checkAllTagsClosed() {
+        if (!openTagStack.isEmpty())
+            throw new RuntimeException("The following tags are still open: "
+                    + openTagStack.stream().map(e -> e.display).collect(joining(", ")));
+    }
 }

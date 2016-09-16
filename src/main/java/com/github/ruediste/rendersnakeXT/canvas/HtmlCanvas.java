@@ -1,7 +1,5 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-import java.util.function.Supplier;
-
 import org.owasp.encoder.Encode;
 
 public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
@@ -19,14 +17,14 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * {@link #addAttribute(String, String)} will commit the attributes, causing
      * the postAttributesFragment to be written.
      */
-    default TSelf startTag(String display, String postAttributesFragment, String closeFragment) {
-        internal_target().startTag(display, postAttributesFragment, closeFragment);
+    default TSelf tagStarted(String display, String postAttributesFragment, String closeFragment) {
+        internal_target().tagStarted(display, postAttributesFragment, closeFragment);
         return self();
     }
 
     /**
      * Write the class and the postAttributes fragment of the last started tag (
-     * {@link #startTag(String, String, String)}).
+     * {@link #tagStarted(String, String, String)}).
      */
     default void commitAttributes() {
         internal_target().commitAttributes();
@@ -106,7 +104,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      */
     default TSelf cdata() {
         writeUnescaped("/*<![CDATA[*/");
-        return startTag("cdata", null, "/*]]>*/");
+        return tagStarted("cdata", null, "/*]]>*/");
     }
 
     /**
@@ -128,10 +126,8 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @see #close()
      */
     default TSelf tag(String tagName) {
-        if (tagName == null)
-            throw new RuntimeException("tagName is null");
-        writeUnescaped("<" + tagName);
-        return startTag(tagName, ">", "</" + tagName + ">");
+        internal_target().tag(tagName, tagName);
+        return self();
     }
 
     /**
@@ -151,12 +147,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
         if (tagName == null)
             throw new RuntimeException("tagName is null");
         writeUnescaped("<" + tagName);
-        internal_target().startTagWithoutEndTag(">");
-        return self();
-    }
-
-    default TSelf addAttribute(String key, Supplier<String> value) {
-        internal_target().addAttribute(key, value);
+        internal_target().tagStartedWithoutEndTag(">");
         return self();
     }
 
@@ -183,8 +174,7 @@ public interface HtmlCanvas<TSelf extends HtmlCanvas<TSelf>> {
      * @return the receiver, an HtmlAttributes
      */
     default TSelf addAttribute(String key, int value) {
-        checkAttributesUncommited();
-        writeUnescapedWithoutAttributeCommiting(" " + key + "=\"" + value + "\"");
+        internal_target().addAttribute(key, value);
         return self();
     }
 

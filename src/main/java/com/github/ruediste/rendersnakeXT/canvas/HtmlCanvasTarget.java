@@ -1,29 +1,38 @@
 package com.github.ruediste.rendersnakeXT.canvas;
 
-import java.util.function.Supplier;
+import org.owasp.encoder.Encode;
 
 public interface HtmlCanvasTarget {
 
     void writeUnescapedWithoutAttributeCommitting(String str);
 
-    void writeUnescapedWithoutAttributeCommitting(Supplier<String> str);
-
+    /**
+     * Commit the attributes and write the given string to the output
+     */
     void writeUnescaped(String str);
 
     default void tag(String displayName, String tagName) {
         if (tagName == null)
             throw new RuntimeException("tagName is null");
         writeUnescaped("<" + tagName);
-        startTag(displayName, ">", "</" + tagName + ">");
+        tagStarted(displayName, ">", "</" + tagName + ">");
     }
 
-    void startTagWithoutEndTag(String postAttributesFragment);
+    void tagStartedWithoutEndTag(String postAttributesFragment);
 
-    void startTag(String display, String postAttributesFragment, String closeFragment);
+    void tagStarted(String display, String postAttributesFragment, String closeFragment);
 
-    void addAttribute(String key, String value);
+    default void addAttribute(String key, String value) {
+        checkAttributesUncommited();
+        writeUnescapedWithoutAttributeCommitting(" " + key + "=\"");
+        writeUnescapedWithoutAttributeCommitting(Encode.forHtmlAttribute(value));
+        writeUnescapedWithoutAttributeCommitting("\"");
+    }
 
-    void addAttribute(String key, Supplier<String> value);
+    default void addAttribute(String key, int value) {
+        checkAttributesUncommited();
+        writeUnescapedWithoutAttributeCommitting(" " + key + "=\"" + value + "\"");
+    }
 
     void commitAttributes();
 

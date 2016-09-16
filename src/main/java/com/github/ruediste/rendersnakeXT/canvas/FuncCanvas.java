@@ -4,15 +4,24 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>>
-        extends HtmlCanvas<TSelf> {
+public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>> extends HtmlCanvas<TSelf> {
 
     /**
      * Supply the value of the optional to the consumer if the value is present
      */
-    default <T> TSelf fIfPresent(Optional<T> optional,
-            Consumer<? super T> renderer) {
+    default <T> TSelf fIfPresent(Optional<T> optional, Consumer<? super T> renderer) {
         optional.ifPresent(renderer);
+        return self();
+    }
+
+    /**
+     * Supply the value of the optional to the consumer if the value is present
+     */
+    default <T> TSelf fIfPresent(Optional<T> optional, Consumer<? super T> renderer, Runnable empty) {
+        if (optional.isPresent()) {
+            renderer.accept(optional.get());
+        } else
+            empty.run();
         return self();
     }
 
@@ -58,8 +67,7 @@ public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>>
     /**
      * supply each value of an iterable to a renderer
      */
-    default <T> TSelf fForEach(Iterable<T> items,
-            Consumer<? super T> renderer) {
+    default <T> TSelf fForEach(Iterable<T> items, Consumer<? super T> renderer) {
         for (T item : items) {
             renderer.accept(item);
         }
@@ -69,8 +77,7 @@ public interface FuncCanvas<TSelf extends FuncCanvas<TSelf>>
     /**
      * supply each value of an iterable to a renderer
      */
-    default <T> TSelf fForEach(Iterable<T> items,
-            BiConsumer<Integer, ? super T> renderer) {
+    default <T> TSelf fForEach(Iterable<T> items, BiConsumer<Integer, ? super T> renderer) {
         int idx = 0;
         for (T item : items) {
             renderer.accept(idx, item);
