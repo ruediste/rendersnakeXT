@@ -1483,4 +1483,88 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
     default TSelf BhiddenPrint() {
         return CLASS("hidden-print");
     }
+
+    enum B_PANEL_TYPE {
+        DEFAULT, SUCESS, INFO, WARNING, DANGER
+    }
+
+    /**
+     * Start a panel
+     * 
+     * <p>
+     * <img src="doc-files/bPanel.png" />
+     * 
+     * <pre>
+     *  {@code
+     * <div class="panel panel-default">
+     *   <div class="panel-heading">Panel heading without title</div>
+     *   <div class="panel-body">
+     *     Panel content
+     *   </div>
+     * </div>
+     * }
+     * </pre>
+     */
+    default TSelf bPanel() {
+        return bPanel(B_PANEL_TYPE.DEFAULT);
+    }
+
+    /**
+     * Start a panel
+     * 
+     * <p>
+     * <img src="doc-files/bPanel.png" />
+     * 
+     * <pre>
+     *  {@code
+     * <div class="panel panel-default">
+     *   <div class="panel-heading">Panel heading without title</div>
+     *   <div class="panel-body">
+     *     Panel content
+     *   </div>
+     * </div>
+     * }
+     * </pre>
+     */
+    default TSelf bPanel(B_PANEL_TYPE type) {
+        return tag("div", "bPanel").CLASS("panel panel-" + type.toString().toLowerCase());
+    }
+
+    default TSelf _bPanel() {
+        return close("bPanel");
+    }
+
+    default TSelf bPanelHeading() {
+        return tag("div", "bPanelHeading").CLASS("panel-heading");
+    }
+
+    default TSelf _bPanelHeading() {
+        return close("bPanelHeading");
+    }
+
+    default TSelf bPanelBody() {
+        return tag("div", "bPanelBody").CLASS("panel-body");
+    }
+
+    default TSelf _bPanelBody() {
+        return close("bPanelBody");
+    }
+
+    /**
+     * <pre>
+     *  {@code
+      <div class="panel panel-default">
+    <div class="panel-heading">
+     <h3 class="panel-title">Panel title</h3>
+    </div>
+    <div class="panel-body">
+     Panel content
+    </div>
+    </div>
+     * }
+     * </pre>
+     */
+    default TSelf BpanelTitle() {
+        return CLASS("panel-title");
+    }
 }
