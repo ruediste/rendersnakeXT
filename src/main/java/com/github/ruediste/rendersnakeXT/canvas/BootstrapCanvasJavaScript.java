@@ -7,7 +7,7 @@ public interface BootstrapCanvasJavaScript<TSelf extends BootstrapCanvas<TSelf>>
      * 
      * <pre>
      * {@code
-     * <div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -29,8 +29,14 @@ public interface BootstrapCanvasJavaScript<TSelf extends BootstrapCanvas<TSelf>>
      */
 
     default TSelf bModal() {
-        return tag("div", "bModal").CLASS("modal fade").TABINDEX("-1").ROLE("dialog").div().CLASS("modal-dialog")
-                .ROLE("document").div().CLASS("modal-content");
+        return bModal(false);
+    }
+
+    default TSelf bModal(boolean show) {
+        TSelf result = tag("div", "bModal").CLASS("modal").TABINDEX("-1").ROLE("dialog");
+        if (show)
+            result = result.STYLE("display: block");
+        return result.div().CLASS("modal-dialog").ROLE("document").div().CLASS("modal-content");
     }
 
     default TSelf _bModal() {

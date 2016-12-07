@@ -1222,7 +1222,15 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
      * Use the generic close icon for dismissing content like modals and alerts.
      */
     default TSelf bCloseIcon() {
-        return button().TYPE("button").CLASS("close").addAttribute("aria-label", "Close").span()
+        return bCloseIcon(() -> {
+        });
+    }
+
+    /**
+     * Use the generic close icon for dismissing content like modals and alerts.
+     */
+    default TSelf bCloseIcon(Runnable customizer) {
+        return button().TYPE("button").CLASS("close").addAttribute("aria-label", "Close").render(customizer).span()
                 .addAttribute("aria-hidden", "true").writeUnescaped("&times;")._span()._button();
     }
 
