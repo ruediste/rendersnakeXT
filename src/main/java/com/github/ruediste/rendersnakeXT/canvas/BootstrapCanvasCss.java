@@ -1500,7 +1500,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
      * Start a panel
      * 
      * <p>
-     * <img src="doc-files/bPanel.png" />
+     * <img src="doc-files/bPanel.png" alt="">
      * 
      * <pre>
      *  {@code
@@ -1521,7 +1521,7 @@ public interface BootstrapCanvasCss<TSelf extends BootstrapCanvas<TSelf>> extend
      * Start a panel
      * 
      * <p>
-     * <img src="doc-files/bPanel.png" />
+     * <img src="doc-files/bPanel.png" alt="">
      * 
      * <pre>
      *  {@code
